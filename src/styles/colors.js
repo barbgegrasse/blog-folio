@@ -1,5 +1,7 @@
 //theme colors and tints (dark900 to normal500 to light100)
 const colors = {
+    white100: "#F9FFEE",//main text
+
     blue900: "#192c4c",
     blue800: "#2a4a7f",
     blue700: "#3a67b2",
@@ -15,8 +17,8 @@ const colors = {
     green200: "#E2F1DA",
     green100: "#F0F8ED",
 
-    grey900: "#111010",
-    grey800: "#3D3F42",
+    grey900: "#222831", //background body
+    grey800: "#1A1D24", //background card
     grey700: "#7D7F81",
     grey600: "#A9AAAB",
     grey500: "#BEBFC0",
@@ -30,7 +32,9 @@ const colors = {
     orange200: "#FDE1D9",
     orange100: "#FEF0EC",
 
-    pink900: "#804980",
+    yellow500: "#EFBB35",//TITRE BLOG
+
+    pink900: "#F59BAC",
     pink800: "#B366B3",
     pink700: "#CC74CC",
     pink600: "#E683E6",
@@ -54,6 +58,7 @@ const colors = {
     teal500: "#17B1B1",
     teal200: "#D1EFEF",
     teal100: "#E8F7F7",
+    
 }
 
 export default colors;

@@ -6,9 +6,9 @@ const dimensions = {
     maxwidthMobile: 600,
 
     //ems
-    paddingHorizontalDesktop: 4,
-    paddingHorizontalTablet: 2.5,
-    paddingHorizontalMobile: 2,
+    paddingHorizontalDesktop: 2,
+    paddingHorizontalTablet: 1.5,
+    paddingHorizontalMobile: 1,
 }
 
 export default dimensions;

@@ -1,0 +1,438 @@
+body{
+    font-family: 'Roboto Mono';
+    background-repeat: no-repeat;
+    background-position: right 50%;
+    //background-color: #282c34;
+    background: linear-gradient(#001744, #170035);
+}
+
+.noise {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-image: url(data:image/png;base64,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);
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+//BG de la lune
+.moon-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    .moon-light {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 29.427%;
+        margin: auto;
+        height: 1385px;
+        width: 1385px;
+        z-index: -100;
+        .moonlight__wrap{
+            position: relative;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+
+        }
+        .moonlight__img{
+            background-image: url(../../images/moonlight.svg);
+            background-size: 100%;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+//Lune + mainlogo
+.block-moon{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 29.427%;
+    margin: auto;
+    height: 1385px;
+    width: 1385px;
+    .wrap{
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .wrap-logo{
+            z-index: 200;
+            
+            position: absolute;
+            top: 50%;
+            left: 120%;
+            transform: translate(-50%,-50%);
+        }
+
+        .wrap-moon{
+            z-index: 200;
+            
+            position: absolute;
+            top: 50%;
+            left: 120%;
+            transform: translate(-50%,-50%);
+        }
+
+        .moon{
+            background-image: linear-gradient(to bottom, #f47ece, #f47ece, #f7863e, #f7863e);
+            clip-path: circle(50%);
+            width: 545px;
+            height: 545px;
+        }
+
+        .main-logo{                
+            display: block;
+            width: 438px;
+            height: 386px;
+        
+            background-image: url(../../images/logo2.svg);
+            background-size: cover;
+        }
+    }
+}
+
+//mini logos
+.html-logo{
+    position: absolute;
+    top: 960px;
+    left: 640px;
+    font-family: 'Share Tech Mono';
+    font-size: 60px;
+    color: #e6bd44;
+}
+
+.js-logo{
+    position: absolute;
+    top: 370px;
+    left: 580px;
+
+    font-family: 'Share Tech Mono';
+    font-size: 71px;
+    color: #ea8748;
+}
+
+.rideau{
+    position: fixed;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    z-index: 500;
+    background-color: #080a0c;
+    &.left{
+        left: 0;
+        background: #000;
+    }
+    &.right{
+        right: 0;
+        background: #000;
+    }
+}
+
+/* SECTION 1 */
+.block-presentation{
+    position: absolute;
+    color: #fff;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    -webkit-transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0);
+    z-index: 200;
+    margin-left: 11%;
+}
+
+.main-title{
+    margin-left: -800px;
+    font-family: 'IBM Plex Mono', monospace;
+    color : #f7863e;
+    font-size: 120px;
+    font-weight: 200;
+    line-height: 1;
+    font-style: italic;
+    .item{display: block;}
+}
+
+.fonction {
+    margin-left: -590px;
+    font-size: 36px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+
+    &.smaller {
+        font-size: 22px;
+        letter-spacing: -1px;
+    }
+}
+
+.block-span{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    transform: translate(-100%,0);
+    .item{
+        display: block;
+        width: 88px;
+        height: 4px;
+        border-radius: 5px;
+        background-color: #f5809b;
+        &:first-child{
+            margin-bottom: 15px;
+        }
+        &:last-child{
+            margin-left: 54px;;
+        }
+    }
+}
+
+/*
+/* SECTION 2 
+*/
+.bloc-presentation {
+    z-index: 200;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 11%;
+    transform: translate(0,-50%);
+    overflow: hidden;
+
+    &.current{
+        display: inherit;
+    }
+}
+
+
+.title-project{
+    font-family: 'IBM Plex Mono', monospace;
+    color : #f7863e;
+    font-size: 80px;
+    font-weight: 200;
+    line-height: 1;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgb(0, 6, 34); 
+    transform: translate(-101%, 0);
+}
+
+.desc-project{
+    color: #FFF;
+    font-size: 24px;
+    max-width: 450px;
+    text-shadow: 1px 1px 2px rgb(0, 6, 34); 
+    transform: translate(-100%, 0);
+}
+
+.technos{
+    font-size: 30px;
+    color: #ffe665;
+    margin-top: 40px;
+    font-family: 'Share Tech Mono';
+    transform: translate(-100%, 0);
+}
+
+.count {
+    position: absolute;
+    right: 8%;
+    bottom: 13%;
+
+    font-size: 112px;
+    color: #FFF;
+    font-family: 'Share Tech Mono';
+
+    .wrap-count{
+        position: relative;
+        overflow: hidden;
+        padding-right: 56px;
+        .item{
+            position: absolute;
+            right: 0;
+            transform: translateY(100%);
+            &.current{
+                transform: translateY(0%);
+            }
+        }
+    }
+}
+
+.link-project{
+    display: block;
+    padding: 15px 20px;
+    max-width: 390px;
+    margin-top: 40px;
+    border-radius: 25px;
+    
+    background: linear-gradient(to left, #bf42ff, #ff3838);
+    color: #FFF;
+
+    font-weight: 800;    
+    font-size: 23px;
+    text-decoration: none;
+}
+
+.next-project{
+    position: absolute;
+    top: 20%;
+    left: 11%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    padding: 15px 0;
+    cursor: pointer;
+    
+
+    .wrap-trait{
+        display: block;
+        position: relative;
+        width: 100px;
+        height: 6px;
+        overflow: hidden;
+
+        .movetrait{
+            transform: translateX(-100%);
+            display: block;
+            height: 6px;
+        }
+
+        .trait{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: block;
+            width: 100px;
+            height: 6px;
+            border-radius: 5px;
+
+            background-color: #FFF;
+            transition: all .1s ease-in-out;
+
+            background: rgba(255, 0, 89, 1);
+            background: -webkit-linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background: -moz-linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background: -ms-linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background: -o-linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background: linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background-size: 400% 400%;
+            -webkit-animation: errorBg 5s linear infinite;
+            -moz-animation: errorBg 5s linear infinite;
+            animation: errorBg 5s linear infinite;
+        }
+    }
+    &:hover{
+        .wrap-trait{
+            overflow: initial;
+        }
+        /*
+        .trait:nth-child(1){
+            transform: rotate(23deg);
+            transform-origin: center right;
+            top: -2px;
+        }
+        */
+        .trait{
+            clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+            height: 50px;
+        }
+    }
+}
+
+@keyframes errorBg {
+    0% {
+        background-position: 100% 0%
+    }
+    100% {
+        background-position: 15% 100%
+    }
+}
+
+.illu-project-wrapper{
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    right: 11%;
+    min-width: 1020px;
+    z-index: 0;
+    opacity: 0;
+
+    .overflow{
+        overflow: hidden;
+    }
+    .gatsby-image-wrapper{
+        transform: translate(100%,0);
+    }
+    &.current{
+        .gatsby-image-wrapper{
+            transform: translate(0,0);
+        }
+    }
+
+    .image-hover{
+        z-index: 10;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #8100b1;
+        opacity: 0.2;
+        transition: all 0.3s linear;
+        &:hover{
+            background: rgba(255, 0, 89, 1);
+            background: -webkit-linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background: -moz-linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background: -ms-linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background: -o-linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background: linear-gradient(45deg, rgba(255, 0, 89, 1) 0%, rgba(0, 179, 255, 1) 33%, rgba(255, 0, 89, 1) 66%, rgba(0, 179, 255, 1) 100%);
+            background-size: 400% 400%;
+            -webkit-animation: errorBg 5s linear infinite;
+            -moz-animation: errorBg 5s linear infinite;
+            animation: errorBg 5s linear infinite;
+        }
+    }
+}
+
+/* fullpage */
+#fp-nav ul li {
+    height: 3px;
+    margin: 0 0 40px;
+}
+
+#fp-nav ul li a span, .fp-slidesNav ul li a span{
+    background-color: #FFF;
+    display: none;
+}
+
+#fp-nav ul li a, .fp-slidesNav ul li a{
+    width: 24px;
+    height: 100%;
+    background: #fff;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    &.active{
+        width: 40px;;
+    }
+}
+
+
+
+/*
+@keyframes body-bg {
+    from {
+        background-color: #000;
+    }
+  
+    to {
+
+    }
+  }
+
+*/

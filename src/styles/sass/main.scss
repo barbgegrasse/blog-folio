@@ -1,0 +1,10 @@
+//! CMD --> sass --watch sass/main.scss:css/stylesheet.css
+@charset 'UTF-8';
+
+//. Vendors
+@import
+    'vendors/normalize';
+
+//. Pages
+@import
+    'pages/home';

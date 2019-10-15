@@ -15,9 +15,11 @@ const globalStyles = css`
     body {
         width: 100%;
         margin: 0 auto;
-        font-size: 16px;
+        font-size: 24px;
+        font-family: 'Roboto Mono';
         line-height: 1.5;
-        color: ${colors.grey900};
+        background-color: ${colors.grey900};
+        color: ${colors.white100};
         -webkit-font-smoothing: antialiased;
 
         @media(max-width: ${dimensions.maxwidthMobile}px) {

@@ -53,8 +53,8 @@ const Footer = () => (
         <Link to="/">
             <Logo />
         </Link>
-        <FooterAuthor href="https://marguerite.io">
-            © 2019 — Designed & developed by Marguerite Roth
+        <FooterAuthor href="http://developpeur-web.tech">
+            © {new Date().getFullYear()} — Designed & developed by Johan Petrikovsky - Powered by Gatsby & Prismic 
             <FooterSpooch className="FooterSpooch" src={spooch} />
         </FooterAuthor>
     </FooterContainer>

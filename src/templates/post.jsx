@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
+import Img from "gatsby-image"
 import Moment from 'react-moment';
 import { graphql } from 'gatsby';
 import { RichText } from "prismic-reactjs";
 import styled from "@emotion/styled";
 import colors from "styles/colors";
-import Layout from "components/Layout";
+import Layout from "components/Layout"
+//Slice
+import Code from "components/slices/Code"
+import Text from "components/slices/Text"
+import Image from "components/slices/Image";
 
 const PostHeroContainer = styled("div")`
     max-height: 500px;
@@ -50,17 +55,18 @@ const PostCategory = styled("div")`
 `
 
 const PostTitle = styled("div")`
-    max-width: 550px;
+    max-width: 980px;
     margin: 0 auto;
     text-align: center;
 
     h1 {
         margin-top: 0;
+        color: ${colors.yellow500};
     }
 `
 
 const PostBody = styled("div")`
-    max-width: 550px;
+    max-width: 980px;
     margin: 0 auto;
 
     .block-img {
@@ -91,6 +97,32 @@ const PostAuthor = styled("div")`
 const PostDate = styled("div")`
     margin: 0;
 `
+
+const PostSlices = ({ slices })=>{
+    return slices.map((slice,index) => {
+        const res = ( () => {
+            switch(slice.type){
+                case 'code_snippet':return(
+                    <div key={ index } className="code-snippet">
+                        <Code slice={ slice } />
+                    </div>
+                )
+                case 'text':return(
+                    <div key={ index } className="rich-text">
+                        <Text slice={ slice } />
+                    </div>
+                )
+                case 'image':return(
+                    <div key={ index } className="image-section">
+                        <Image slice={ slice } />
+                    </div>
+                )
+                default: return
+            }
+        })();
+        return res;
+    })
+}
 
 const Post = ({ post, meta }) => {
     return (
@@ -133,6 +165,7 @@ const Post = ({ post, meta }) => {
                     },
                 ].concat(meta)}
             />
+            {console.log(post)}
             <Layout>
                 <PostCategory>
                     {RichText.render(post.post_category)}
@@ -157,7 +190,7 @@ const Post = ({ post, meta }) => {
                     </PostHeroContainer>
                 )}
                 <PostBody>
-                    {RichText.render(post.post_body)}
+                    <PostSlices slices={post.post_body} />
                 </PostBody>
             </Layout>
         </>
@@ -188,8 +221,37 @@ export const query = graphql`
                         post_hero_annotation
                         post_date
                         post_category
-                        post_body
                         post_author
+                        post_body {
+                            ... on PRISMIC_PostPost_bodyText {
+                              type
+                              label
+                              primary {
+                                rich_text
+                              }
+                            }
+                            ... on PRISMIC_PostPost_bodyCode_snippet {
+                              type
+                              label
+                              primary {
+                                code_snippet
+                              }
+                            }
+                            ... on PRISMIC_PostPost_bodyHighlighted_text {
+                              type
+                              label
+                              primary {
+                                highlight_title
+                              }
+                            }
+                            ... on PRISMIC_PostPost_bodyImage {
+                              type
+                              label
+                              primary{
+                                  image
+                              }
+                            }
+                        }
                         post_preview_description
                         _meta {
                             uid

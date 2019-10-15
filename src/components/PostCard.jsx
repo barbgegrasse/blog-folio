@@ -16,6 +16,7 @@ const PostCardContainer = styled(Link)`
     flex-direction: column;
     box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.06);
     transition: all 150ms ease-in-out;
+    background-color: ${colors.grey800};
 
     &:hover {
         box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.1);
@@ -23,7 +24,7 @@ const PostCardContainer = styled(Link)`
         cursor: pointer;
 
         .PostCardAction {
-            color: ${colors.blue500};
+            color: ${colors.pink900};
             transition: all 150ms ease-in-out;
 
             span {
@@ -35,14 +36,15 @@ const PostCardContainer = styled(Link)`
     }
 `
 
-const PostCategory = styled("h6")`
+const PostCategory = styled("h3")`
     font-weight: 600;
     color: ${colors.grey600};
 `
 
-const PostTitle = styled("h3")`
+const PostTitle = styled("h2")`
     margin: 0;
     margin-top: 0.5em;
+    color: ${colors.yellow500};
 `
 
 const PostMetas = styled("div")`

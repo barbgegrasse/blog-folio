@@ -6,14 +6,19 @@ import styled from "@emotion/styled";
 import dimensions from "styles/dimensions";
 import Layout from "components/Layout";
 import PostCard from "components/PostCard";
+import colors from "styles/colors";
 
 const BlogTitle = styled("h1")`
     margin-bottom: 1em;
+    text-align:center;
+    color: ${colors.yellow500};
+    font-weight: 200;
+    font-style: italic;
 `
 
 const BlogGrid = styled("div")`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 2.5em;
 
     @media(max-width: 1050px) {
@@ -23,7 +28,7 @@ const BlogGrid = styled("div")`
 
     @media(max-width: ${dimensions.maxwidthMobile}px) {
         grid-template-columns: 1fr;
-        grid-gap: 2.5em;
+        grid-gap: 1.5em;
     }
 `
 
@@ -115,6 +120,36 @@ export const query = graphql`
                         post_category
                         post_preview_description
                         post_author
+                        post_body {
+                            ... on PRISMIC_PostPost_bodyText {
+                              type
+                              label
+                              primary {
+                                rich_text
+                              }
+                            }
+                            ... on PRISMIC_PostPost_bodyCode_snippet {
+                              type
+                              label
+                              primary {
+                                code_snippet
+                              }
+                            }
+                            ... on PRISMIC_PostPost_bodyHighlighted_text {
+                              type
+                              label
+                              primary {
+                                highlight_title
+                              }
+                            }
+                            ... on PRISMIC_PostPost_bodyImage {
+                              type
+                              label
+                              primary{
+                                  image
+                              }
+                            }
+                        }
                         _meta {
                             uid
                         }

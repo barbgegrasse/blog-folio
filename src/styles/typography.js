@@ -3,9 +3,11 @@ import dimensions from "styles/dimensions";
 
 const typeStyles = css`
     h1 {
-        font-size: 2.8em;
+        font-size: 3.7em;
         line-height: 1.45;
-        font-weight: 800;
+        font-weight: 200;
+        font-family: 'IBM Plex Mono', monospace;
+        font-weight: 200;
 
         @media(max-width:${dimensions.maxwidthTablet}px) {
             font-size: 2.25em;
@@ -20,11 +22,15 @@ const typeStyles = css`
         margin-bottom: 2rem;
         font-size: 1.9em;
         line-height: 1.1;
+        font-family: 'IBM Plex Mono', monospace;
+        font-weight: 200;
     }
 
     h3 {
         line-height: 1.2;
         font-size: 1.5em;
+        font-family: 'IBM Plex Mono', monospace;
+        font-weight: 200;
     }
 
     h5 {
@@ -32,12 +38,16 @@ const typeStyles = css`
         font-weight: 500;
         line-height: 20px;
         font-size: 0.95em;
+        font-family: 'IBM Plex Mono', monospace;
+        font-weight: 200;
     }
 
     h6 {
         font-size: 0.9em;
         font-weight: 500;
         margin: 0;
+        font-family: 'IBM Plex Mono', monospace;
+        font-weight: 200;
     }
 
     p {

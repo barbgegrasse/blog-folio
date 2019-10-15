@@ -35,12 +35,55 @@ exports.createPages = async ({ graphql, actions }) => {
                         node {
                             post_title
                             post_hero_image
+                            post_hero_imageSharp {
+                                childImageSharp {
+                                  children {
+                                    ... on ImageSharp {
+                                      id
+                                      fluid {
+                                        aspectRatio
+                                        srcWebp
+                                        srcSetWebp
+                                      }
+                                    }
+                                  }
+                                }
+                            }
                             post_hero_annotation
                             post_date
                             post_category
-                            post_body
                             post_preview_description
                             post_author
+                            post_body {
+                                ... on PRISMIC_PostPost_bodyText {
+                                  type
+                                  label
+                                  primary {
+                                    rich_text
+                                  }
+                                }
+                                ... on PRISMIC_PostPost_bodyCode_snippet {
+                                  type
+                                  label
+                                  primary {
+                                    code_snippet
+                                  }
+                                }
+                                ... on PRISMIC_PostPost_bodyHighlighted_text {
+                                  type
+                                  label
+                                  primary {
+                                    highlight_title
+                                  }
+                                }
+                                ... on PRISMIC_PostPost_bodyImage {
+                                  type
+                                  label
+                                  primary{
+                                      image
+                                  }
+                                }
+                            }
                             _meta {
                                 uid
                             }

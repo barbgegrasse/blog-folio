@@ -1,10 +1,29 @@
 module.exports = {
   siteMetadata: {
-    title: `Prist | Gatsby & Prismic Starter`,
-        description: `A starter powered by Gatsby and Prismic to showcase portfolios and blogs.`,
-    author: `Marguerite Roth | marguerite.io`,
+    title: `Kovsky-dev | Front-end developpeur`,
+    description: `Développeur front end depuis 8ans à Toulouse.`,
+    author: `Johan Petrikovsky | marguerite.io`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `IBM Plex Mono`,
+            variants: [`200`, `400`]
+          },
+          {
+            family: `Roboto Mono`,
+            variants: [`400`]
+          },
+          {
+            family: `Share Tech Mono`,
+            variants: [`400`]
+          }
+        ],
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -26,7 +45,7 @@ module.exports = {
     {
         resolve: 'gatsby-source-prismic-graphql',
         options: {
-            repositoryName: 'prist', // (REQUIRED, replace with your own)
+            repositoryName: 'kovsky-blog', // (REQUIRED, replace with your own)
             linkResolver: () => post => `/${post.uid}`,
         }
     },
