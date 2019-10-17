@@ -94,6 +94,22 @@ class FullpageWrapper extends React.Component {
         
     }
 
+    componentDidMount(){
+        //console.log("render prop change", fullpageApi); // eslint-disable-line no-console
+        new TimelineMax()
+        
+        //Animation des rideaux
+        //.to('#fullpage', 1, {backgroundImage:"-webkit-linear-gradient(112deg, rgb(206, 38, 93) 34%, #0f0350 34%)", ease: Power1.easeInOut},'-=0.4')
+        //Animation des éléments de présentation
+        .to('#mainTitle',1,{marginLeft:0, ease: Power1.easeInOut},'-=1') 
+        .to('#blockSpan',0.5,{xPercent:24, ease: Power2.easeInOut},'-=0.5') 
+        .to('#fonction',0.5,{xPercent:100, ease: Power2.easeInOut},'-=0.5') 
+
+        //Animation de la boule et du logo
+        .to('#wrapMoon',0.9,{left:'50%', ease: Power1.easeInOut},'-=0.9') 
+        .to('#wrapLogo',1,{left:'50%', ease: Power1.easeInOut},'-=1') ;
+    }
+
     render(){
 
         const { data } = this.props
@@ -173,23 +189,12 @@ class FullpageWrapper extends React.Component {
                         
                     }}
 
+
+
                     
                     render={({ state, fullpageApi }) => {
                         this.fullPageApi = fullpageApi;
-                        //console.log("render prop change", fullpageApi); // eslint-disable-line no-console
-                        const action = new TimelineMax()
-                        
-                        //Animation des rideaux
-                        //Animation des éléments de présentation
-                        .to('#mainTitle',1,{marginLeft:0, ease: Power1.easeInOut},'-=1') 
-                        .to('#blockSpan',0.5,{xPercent:24, ease: Power2.easeInOut},'-=0.5') 
-                        .to('#fonction',0.5,{xPercent:100, ease: Power2.easeInOut},'-=0.5') 
 
-                        //Animation de la boule et du logo
-                        .to('#wrapMoon',0.9,{left:'50%', ease: Power1.easeInOut},'-=0.9') 
-                        .to('#wrapLogo',1,{left:'50%', ease: Power1.easeInOut},'-=1') ;
-
-                        
                         return (
                             <>
                                 <div> 
@@ -240,7 +245,7 @@ class FullpageWrapper extends React.Component {
                                                 <div className="movetrait">
                                                     
 
-                                                    <span class="trait"></span>
+                                                    <span className="trait"></span>
                                                 </div>
                                             </div>
                                         </div>
