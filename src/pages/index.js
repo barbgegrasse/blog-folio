@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactFullpage from '@fullpage/react-fullpage'
 import LayoutIndex from "../components/LayoutIndex"
-import { TweenLite, Linear, TweenMax, TimelineMax, Power1, Power2, Power4 } from "gsap";
+import { TweenLite, Linear, TweenMax, TimelineMax, Power1, Power2, Power4,Bounce } from "gsap";
 import "../styles/css/stylesheet.css"
 import { graphql } from "gatsby"
 import BackgroundImage from "gatsby-image"
@@ -15,7 +15,8 @@ class FullpageWrapper extends React.Component {
         this.state = {
             currentProject: 0, //indice de mon projet
             projects : ["project1","project2","project3"], //liste des classes sur div de mes projets
-            animProject : true
+            animProject : true,
+            done : false
         }
     }
 
@@ -32,6 +33,8 @@ class FullpageWrapper extends React.Component {
             
             //On réduit la taille des visuels
             .to('.illu-project-wrapper',1,{scaleX:0.8, scaleY:0.8, ease: Power4.easeInOut},'-=1.5') 
+            .to('#fullpage', 0.5, {backgroundImage:"-webkit-linear-gradient(180deg, rgb(206, 38, 93) 100%, #ffffff 34%)", ease: Power1.easeInOut})
+            .to('#fullpage', 0.5, {backgroundImage:"-webkit-linear-gradient(180deg, rgb(61, 31, 93) 34%, #ffffff 34%)", ease: Power1.easeInOut})
             
             //Décalage des visuels en meme temps
             .to('.illu-project-wrapper.'+this.state.projects[currentProject]+' .gatsby-image-wrapper',1,{xPercent: -100 , ease: Power4.easeInOut},'-=0.8') 
@@ -55,7 +58,7 @@ class FullpageWrapper extends React.Component {
             this.setState({ currentProject: nextProject })
         }
     }
-
+    /*
     _onMouseMove(e) {
         //Je récupère ma lune
         const moon = document.querySelector("#moon").getBoundingClientRect();
@@ -85,6 +88,7 @@ class FullpageWrapper extends React.Component {
         document.querySelector('#moon').style.transform = `translate3d( ${moveXmoon}px, ${moveYmoon}px, 0 )`;        
         document.querySelector('#mainLogo').style.transform = `translate3d( ${moveXmainLogo}px, ${moveYmainLogo}px, 0 )`;        
     }
+    */
 
     componentWillMount() {
         
@@ -106,16 +110,30 @@ class FullpageWrapper extends React.Component {
                     navigationPosition={"left"}
                     sectionsColor={["transparent", "transparent", "transparent"]}
                     onLeave={(origin, destination, direction) => {
-                        //console.log("onLeave event", { origin, destination, direction });
-                        console.log(destination.index);
+                        
+                        var done = false;
+                        var animationTimeout;
+                        var transitionTimeout;
+                        var animationTime = 900;
+                        var transitionTime = 500;
+
                         if(origin.index == 0){
+
+                            if (this.state.done) return ;
+                            //cancel any previous timeout as onLeave fires quite a bit.
+                            clearTimeout(animationTimeout);
+                            clearTimeout(transitionTimeout);
+                            
+                            
+                            // do animations
+
+                            console.log(this.fullPageApi, this.state.done)
                             //On quitte le premier slide
                             new TimelineMax()
                             //On fait bouger le logo
                             .to('#wrapMoon',0.5,{left:'100%', opacity: 0, ease: Power4.easeInOut}) 
-                            .to('#wrapLogo',0.4,{left:'100%', opacity: 0, ease: Power4.easeInOut},'-=0.4') 
-
-                            //On anime le premier projet si ça n'a jamais été le cas
+                            .to('#wrapLogo',0.4,{left:'100%', opacity: 0, ease: Power4.easeInOut},'-=0.5') 
+                            .to('#fullpage', 1, {backgroundImage:"-webkit-linear-gradient(180deg, rgb(206, 38, 93) 34%, #ffffff 34%)", ease: Power1.easeInOut},'-=0.4')
                             if(this.state.animProject){
                                 new TimelineMax()
                                 .to('.movetrait',0.8,{xPercent: 100 , ease: Power4.easeInOut})  
@@ -127,60 +145,77 @@ class FullpageWrapper extends React.Component {
 
                                 this.setState({ animProject: false })
                             }
+                            
+                            
+                            // after animation time scroll up or down
+                            animationTimeout = setTimeout(()=>{   
+                                console.log("here")   
+                            //deal with scroll
+                            this.setState({ done: true })
+                            if(direction === 'down') {
+                                this.fullPageApi.moveSectionDown();
+                            } else {
+                                this.fullPageApi.moveSectionUp();
+                            }
+                            transitionTimeout=setTimeout(()=>done=false,transitionTime);
+                            },animationTime);
+                            return done;
+                            
                         }
 
                         //Si je retourne sur le premier slide
                         if(destination.index == 0){
-                            console.log("here");
+                            //console.log("here");
                             new TimelineMax()
                             .to('#wrapMoon',0.3,{left:'50%', opacity: 1, ease: Power1.easeInOut}) 
                             .to('#wrapLogo',0.5,{left:'50%', opacity: 1, ease: Power1.easeInOut},'-=0.5') 
                         }
+                        
                     }}
 
                     
                     render={({ state, fullpageApi }) => {
-                        console.log("render prop change", state, fullpageApi); // eslint-disable-line no-console
+                        this.fullPageApi = fullpageApi;
+                        //console.log("render prop change", fullpageApi); // eslint-disable-line no-console
                         const action = new TimelineMax()
                         
                         //Animation des rideaux
-                        .to('#rideauLeft',2,{xPercent: -200 , ease: Power4.easeInOut}) 
-                        .to('#rideauRight',2,{xPercent: 200 , ease: Power4.easeInOut},'-=2') 
-
                         //Animation des éléments de présentation
                         .to('#mainTitle',1,{marginLeft:0, ease: Power1.easeInOut},'-=1') 
                         .to('#blockSpan',0.5,{xPercent:24, ease: Power2.easeInOut},'-=0.5') 
-                        .to('#fonction',0.5,{marginLeft:0, ease: Power2.easeInOut},'-=0.5') 
+                        .to('#fonction',0.5,{xPercent:100, ease: Power2.easeInOut},'-=0.5') 
 
                         //Animation de la boule et du logo
                         .to('#wrapMoon',0.9,{left:'50%', ease: Power1.easeInOut},'-=0.9') 
-                        .to('#wrapLogo',1,{left:'50%', ease: Power1.easeInOut},'-=1') 
+                        .to('#wrapLogo',1,{left:'50%', ease: Power1.easeInOut},'-=1') ;
 
+                        
                         return (
                             <>
-                                <div onMouseMove={this._onMouseMove.bind(this)}> 
+                                <div> 
                                     <div className="section section1">
-                                        <div id="rideauLeft" className="rideau left">
-
-                                        </div>
-                                        <div id="rideauRight" className="rideau right">
-                                        </div>
-
                                         <div id="blockPresentation" className="block-presentation">
                                             <h1 id="mainTitle" className="main-title">
                                                 <span className="item">Johan</span>
                                                 <span className="item">Petri</span>
                                                 <span className="item">Kovsky</span>
                                             </h1>
+          
                                             <div id="blockSpan" className="block-span">
                                                 <span className="item"></span>
                                                 <span className="item"></span>
                                             </div>
-                                            <h2 id="fonction" className="fonction">Front-end web developer</h2>
-                                            <p id="fonction" className="fonction smaller">& Overwatch Master</p>
+                                            <div className="relative wrap-fonction">
+                                                <h2 id="fonction" className="fonction">Front-end web developer</h2>
+                                                <p id="fonction" className="fonction smaller">& Overwatch Master</p>
+                                            </div>
+                                            
                                         </div>
 
                                         <div id="blockMoon" className="block-moon">
+                                            <div className="half">
+                                                
+                                            </div>
                                             <div className="wrap">
                                                 <div id="wrapLogo" className="wrap-logo">
                                                     <div id="moon" className="moon"></div>

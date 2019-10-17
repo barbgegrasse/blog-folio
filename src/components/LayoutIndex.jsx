@@ -41,7 +41,16 @@ const LayoutIndex = ({ children }) => (
 const LayoutIndex = ({ children }) => {
     return (
       <div className="container">
-        <div id="noise" className="noise"></div>
+        <header className="header">
+            <nav className="main-nav">
+                <a href="#">Presentation</a>
+                <a href="#">Portfolio</a>
+                <a href="#">Contact</a>
+                <a href="#">Blog</a>
+                <a href="#">Mentions légales</a>
+            </nav>
+        </header>
+{/*        <div id="noise" className="noise"></div>
         <div className="moon-background">
             <div className="moon-light">
                 <div className="moonlight__wrap">
@@ -50,7 +59,7 @@ const LayoutIndex = ({ children }) => {
                     </div>
                 </div>
             </div>
-        </div>
+    </div>*/}
         <main>{children}</main>
       </div>
     );
