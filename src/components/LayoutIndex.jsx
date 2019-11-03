@@ -1,12 +1,31 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { StaticQuery, graphql } from "gatsby";
-import { Global } from "@emotion/core";
-import globalStyles from 'styles/global';
-import typeStyles from 'styles/typography';
-import Footer from "components/Footer";
-import Header from "components/Header";
-import 'styles/fonts.scss';
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import styled from '@emotion/styled'
+import { Link } from 'gatsby'
+
+const MainNav = styled('nav')`
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 80px;
+  z-index: 10;
+  width: 100%;
+  background-color: #fff;
+
+  a {
+    font-family: 'Share Tech Mono';
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-right: 25px;
+    text-decoration: none;
+  }
+`
+const Span = styled('span')`
+  display: block;
+`
 
 /*
 const LayoutIndex = ({ children }) => (
@@ -38,36 +57,44 @@ const LayoutIndex = ({ children }) => (
 )
 */
 
-const LayoutIndex = ({ children }) => {
-    return (
-      <div className="container">
-        <header className="header">
-            <nav className="main-nav">
-                <a href="#">Presentation</a>
-                <a href="#">Portfolio</a>
-                <a href="#">Contact</a>
-                <a href="#">Blog</a>
-                <a href="#">Mentions légales</a>
-            </nav>
-        </header>
-{/*        <div id="noise" className="noise"></div>
-        <div className="moon-background">
-            <div className="moon-light">
-                <div className="moonlight__wrap">
-                    <div id="bgMoon" className="moonlight__img">
-                        
-                    </div>
-                </div>
-            </div>
-    </div>*/}
-        <main>{children}</main>
-      </div>
-    );
-  };
-  
-
-LayoutIndex.propTypes = {
-    children: PropTypes.node.isRequired,
+const LayoutIndex = ({ children, mainColor }) => {
+  return (
+    <div className="container">
+      <header className="header">
+        <MainNav>
+          <Link activeClassName="Link--is-active" to="#presentation">
+            <Span css={{ color: mainColor }}>Présentation</Span>
+          </Link>
+          <Link activeClassName="Link--is-active" to="#portfolio">
+            <Span css={{ color: mainColor }}>Portfolio</Span>
+          </Link>
+          <Link activeClassName="Link--is-active" to="#contact">
+            <Span css={{ color: mainColor }}>Contact</Span>
+          </Link>
+          <Link activeClassName="Link--is-active" to="/blog">
+            <Span css={{ color: mainColor }}>Blog</Span>
+          </Link>
+          <Link activeClassName="Link--is-active" to="/mentions-legales">
+            <Span css={{ color: mainColor }}>Mentions légales</Span>
+          </Link>
+        </MainNav>
+      </header>
+      <main>{children}</main>
+    </div>
+  )
 }
 
-export default LayoutIndex;
+LayoutIndex.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+export default connect(
+  state => ({
+    mainColor: state.app.mainColor,
+  }),
+  null
+)(LayoutIndex)
+
+LayoutIndex.propTypes = {
+  mainColor: PropTypes.element.isRequired,
+}

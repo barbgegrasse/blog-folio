@@ -11,16 +11,16 @@ module.exports = {
         fonts: [
           {
             family: `IBM Plex Mono`,
-            variants: [`200`, `400`]
+            variants: [`200`, `400`],
           },
           {
             family: `Roboto Mono`,
-            variants: [`400`]
+            variants: [`400`],
           },
           {
             family: `Share Tech Mono`,
-            variants: [`400`]
-          }
+            variants: [`400`],
+          },
         ],
       },
     },
@@ -43,11 +43,11 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-        resolve: 'gatsby-source-prismic-graphql',
-        options: {
-            repositoryName: 'kovsky-blog', // (REQUIRED, replace with your own)
-            linkResolver: () => post => `/${post.uid}`,
-        }
+      resolve: 'gatsby-source-prismic-graphql',
+      options: {
+        repositoryName: 'kovsky-blog', // (REQUIRED, replace with your own)
+        linkResolver: () => post => `/${post.uid}`,
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,

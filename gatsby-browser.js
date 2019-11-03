@@ -8,7 +8,8 @@
 // const { linkResolver } = require('./src/utils/prismic-configuration');
 
 // registerLinkResolver(linkResolver);
-const { registerLinkResolver } = require('gatsby-source-prismic-graphql');
-const { linkResolver } = require('./src/utils/linkResolver');
+const { registerLinkResolver } = require('gatsby-source-prismic-graphql')
+const { linkResolver } = require('./src/utils/linkResolver')
+export { default as wrapRootElement } from './src/state/ReduxWrapper'
 
-registerLinkResolver(linkResolver);
+registerLinkResolver(linkResolver)
