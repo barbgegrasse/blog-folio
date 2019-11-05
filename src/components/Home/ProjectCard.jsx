@@ -23,6 +23,8 @@ const BackgroundImageWrap = styled('div')`
   width: 1020px;
   min-height: 720px;
   transform: translateY(-50%);
+
+  mix-blend-mode: multiply;
 `
 
 const BackgroundImage = styled('div')`

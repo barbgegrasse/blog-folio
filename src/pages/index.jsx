@@ -195,11 +195,20 @@ class FullpageWrapper extends React.Component {
         { xPercent: -100, ease: Power4.easeInOut },
         `moveBackground${currentProject}+=0.1`
       )
-      // Déplacement du bouton
+
+      // Déplacement du bouton projet en cours
       .to(
         `.bloc-presentation.project-${currentProjectSlug} .link-project`,
         1,
         { xPercent: -100, ease: Power4.easeInOut },
+        `moveBackground${currentProject}+=0.1`
+      )
+
+      // Déplacement du bouton projet en précédent
+      .to(
+        `.bloc-presentation.project-${prevProjectSlug} .link-project`,
+        1,
+        { xPercent: 100, ease: Power4.easeInOut },
         `moveBackground${currentProject}+=0.1`
       )
 
@@ -271,6 +280,7 @@ class FullpageWrapper extends React.Component {
         },
         `moveBackground${currentProject}+=1`
       )
+      // Animation de la description
       .to(
         `.bloc-presentation.project-${prevProjectSlug} .desc-project`,
         0.5,
@@ -399,9 +409,17 @@ class FullpageWrapper extends React.Component {
         `moveBackground${currentProject}+=0.1`
       )
 
-      // Déplacement du bouton
+      // Déplacement du bouton projet en cours
       .to(
         `.bloc-presentation.project-${currentProjectSlug} .link-project`,
+        1,
+        { xPercent: -100, ease: Power4.easeInOut },
+        `moveBackground${currentProject}+=0.1`
+      )
+
+      // Déplacement du bouton projet en cours
+      .to(
+        `.bloc-presentation.project-${nextProjectSlug} .link-project`,
         1,
         { xPercent: 100, ease: Power4.easeInOut },
         `moveBackground${currentProject}+=0.1`
