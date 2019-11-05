@@ -35,8 +35,6 @@ class FullpageWrapper extends React.Component {
 
     this.dispatch = this.props.dispatch
 
-    console.log('props', this.props)
-
     this.state = {
       currentProject: 0, // indice de mon projet
       projectList: [
@@ -197,7 +195,6 @@ class FullpageWrapper extends React.Component {
         { xPercent: -100, ease: Power4.easeInOut },
         `moveBackground${currentProject}+=0.1`
       )
-
       // Déplacement du bouton
       .to(
         `.bloc-presentation.project-${currentProjectSlug} .link-project`,
@@ -315,6 +312,7 @@ class FullpageWrapper extends React.Component {
 
     // this.animProjects.reverse().
     ggGoPrev.play()
+    return true
   }
 
   clickNext() {
@@ -405,7 +403,7 @@ class FullpageWrapper extends React.Component {
       .to(
         `.bloc-presentation.project-${currentProjectSlug} .link-project`,
         1,
-        { xPercent: -100, ease: Power4.easeInOut },
+        { xPercent: 100, ease: Power4.easeInOut },
         `moveBackground${currentProject}+=0.1`
       )
 
