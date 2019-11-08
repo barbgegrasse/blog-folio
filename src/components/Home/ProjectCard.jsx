@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
+import styled from '@emotion/styled'
+import dimensions from '../../styles/dimensions'
 
 const BlocPresentation = styled('div')`
   z-index: 200;
@@ -21,10 +22,11 @@ const BackgroundImageWrap = styled('div')`
   top: 50%;
 
   width: 1020px;
-  min-height: 720px;
   transform: translateY(-50%);
 
-  mix-blend-mode: multiply;
+  @media (max-width: ${dimensions.maxwidthMacBook}px) {
+    width: 600px;
+  }
 `
 
 const BackgroundImage = styled('div')`
@@ -35,6 +37,10 @@ const BackgroundImage = styled('div')`
   margin-left: 100%;
   &.current {
     margin-left: 0;
+  }
+
+  @media (max-width: ${dimensions.maxwidthMacBook}px) {
+    height: 537px;
   }
 `
 
@@ -136,7 +142,7 @@ export default connect(
 ProjectCard.propTypes = {
   mainColor: PropTypes.element.isRequired,
   project: PropTypes.element.isRequired,
-  currentProject: PropTypes.element.isRequired,
-  totalProjects: PropTypes.element.isRequired,
-  dispatch: PropTypes.element.isRequired,
+  // currentProject: PropTypes.element.isRequired,
+  // totalProjects: PropTypes.element.isRequired,
+  // dispatch: PropTypes.element.isRequired,
 }

@@ -7,6 +7,7 @@ import { graphql } from 'gatsby'
 import { TimelineLite, Power1, Power2, Power4 } from 'gsap'
 import styled from '@emotion/styled'
 import LayoutIndex from '../components/LayoutIndex'
+import dimensions from '../styles/dimensions'
 
 import { setColor } from '../state/app'
 // import { incrementProject, decrementProject } from '../state/app'
@@ -15,11 +16,35 @@ import '../styles/css/stylesheet.css'
 
 import SectionPresentation from '../components/Home/SectionPresentation'
 import SectionProjects from '../components/Home/SectionProjects'
+import SectionContact from '../components/Home/SectionContact'
 import ProjectCard from '../components/Home/ProjectCard'
 import ProjectCounter from '../components/Home/ProjectCounter'
 
 const anchors = ['presentation', 'portfolio', 'contact']
 const animateAnchor = false
+
+const BlockSpan = styled('div')`
+  z-index: 800;
+  position: absolute;
+  top: 395px;
+  @media (max-width: ${dimensions.maxwidthMacBook}px) {
+    top: 355px;
+  }
+  left: 11%;
+  .item {
+    display: block;
+    width: 88px;
+    height: 4px;
+    border-radius: 5px;
+    background-color: #ce265d;
+    &:first-child {
+      margin-bottom: 15px;
+    }
+    &:last-child {
+      margin-left: 54px;
+    }
+  }
+`
 
 class FullpageWrapper extends React.Component {
   constructor(props) {
@@ -117,11 +142,18 @@ class FullpageWrapper extends React.Component {
       .addLabel('firstSlideOver')
   }
 
+  activeMenu(colorItem) {
+    console.log('color item', colorItem)
+    const activeItem = document.querySelector('#mainmenu a:nth-child(2)')
+    activeItem.style.color = colorItem
+  }
+
   clickPrev() {
     const projects = this.state.projectList
     // eslint-disable-next-line prefer-destructuring
     const currentProject = this.state.currentProject
     const prevProject = currentProject - 1
+    // retourne  faux si pas de projet précédent
     if (prevProject < 0) {
       return false
     }
@@ -250,6 +282,15 @@ class FullpageWrapper extends React.Component {
         // eslint-disable-next-line func-names
         function() {
           this.dispatch(setColor(color))
+        },
+        null,
+        this,
+        '-=2'
+      )
+      .call(
+        // eslint-disable-next-line func-names
+        function() {
+          this.activeMenu(color)
         },
         null,
         this,
@@ -469,6 +510,16 @@ class FullpageWrapper extends React.Component {
         '-=2'
       )
 
+      .call(
+        // eslint-disable-next-line func-names
+        function() {
+          this.activeMenu(color)
+        },
+        null,
+        this,
+        'leaveOne'
+      )
+
       // mise à jour du counter
 
       .to(
@@ -547,6 +598,8 @@ class FullpageWrapper extends React.Component {
       <LayoutIndex>
         <ReactFullpage
           anchors={anchors}
+          lockAnchors={false}
+          menu="mainmenu"
           animateAnchor={animateAnchor}
           scrollingSpeed={500}
           navigation
@@ -554,6 +607,12 @@ class FullpageWrapper extends React.Component {
           onLeave={(origin, destination, direction) => {
             if (origin.index === 0) {
               // On quitte le premier slide
+
+              const activeItem = document.querySelector(
+                '#mainmenu a:nth-child(2)'
+              )
+              activeItem.style.color = '#d41e38'
+
               new TimelineLite()
                 .addLabel('leaveOne')
                 // On fait bouger le logo
@@ -733,7 +792,7 @@ class FullpageWrapper extends React.Component {
                   <SectionPresentation />
                   <SectionProjects>
                     <>
-                      <div className="block-span">
+                      <BlockSpan>
                         <span
                           className="item"
                           aria-label="Précédent"
@@ -750,7 +809,7 @@ class FullpageWrapper extends React.Component {
                           onClick={this.clickNext}
                           onKeyDown={this.clickNext}
                         />
-                      </div>
+                      </BlockSpan>
                       {this.state.projectList.map(project => {
                         return (
                           <ProjectCard

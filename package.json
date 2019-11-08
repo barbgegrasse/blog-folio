@@ -8,6 +8,7 @@
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
     "@fullpage/react-fullpage": "^0.1.16",
+    "emotion-media-query": "^1.0.1",
     "gatsby": "^2.12.0",
     "gatsby-image": "^2.2.27",
     "gatsby-plugin-catch-links": "^2.0.12",

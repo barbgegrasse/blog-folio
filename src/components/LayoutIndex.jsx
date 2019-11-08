@@ -21,6 +21,7 @@ const MainNav = styled('nav')`
     color: #fff;
     margin-right: 25px;
     text-decoration: none;
+    color: #0f0350;
   }
 `
 const Span = styled('span')`
@@ -55,27 +56,33 @@ const LayoutIndex = ({ children }) => (
         )}
     />
 )
+
+<Span css={{ color: mainColor }}>Présentation</Span>
 */
 
 const LayoutIndex = ({ children, mainColor }) => {
   return (
     <div className="container">
       <header className="header">
-        <MainNav>
-          <Link activeClassName="Link--is-active" to="#presentation">
-            <Span css={{ color: mainColor }}>Présentation</Span>
-          </Link>
-          <Link activeClassName="Link--is-active" to="#portfolio">
-            <Span css={{ color: mainColor }}>Portfolio</Span>
-          </Link>
-          <Link activeClassName="Link--is-active" to="#contact">
-            <Span css={{ color: mainColor }}>Contact</Span>
-          </Link>
+        <MainNav id="mainmenu">
+          <a
+            href="#presentation"
+            data-menuanchor="presentation"
+            className="active"
+          >
+            <Span>Présentation</Span>
+          </a>
+          <a href="#portfolio" data-menuanchor="portfolio">
+            <Span>Portfolio</Span>
+          </a>
+          <a href="#contact" data-menuanchor="contact">
+            <Span>Contact</Span>
+          </a>
           <Link activeClassName="Link--is-active" to="/blog">
-            <Span css={{ color: mainColor }}>Blog</Span>
+            <Span>Blog</Span>
           </Link>
           <Link activeClassName="Link--is-active" to="/mentions-legales">
-            <Span css={{ color: mainColor }}>Mentions légales</Span>
+            <Span>Mentions légales</Span>
           </Link>
         </MainNav>
       </header>
