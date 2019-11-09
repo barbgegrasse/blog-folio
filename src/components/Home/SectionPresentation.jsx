@@ -2,21 +2,18 @@ import React from 'react'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
-const BlockSpan = styled('div')`
-  margin: 40px 0 40px;
+const Fonction = styled('h2')`
+  font-size: 60px;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  mix-blend-mode: difference;
+  color: white;
   transform: translateX(-100%);
-  .item {
-    display: block;
-    width: 88px;
-    height: 4px;
-    border-radius: 5px;
-    background-color: #ce265d;
-    &:first-child {
-      margin-bottom: 14px;
-    }
-    &:last-child {
-      margin-left: 54px;
-    }
+  margin-top: 100px;
+
+  &.smaller {
+    font-size: 22px;
+    letter-spacing: -1px;
   }
 `
 
@@ -30,17 +27,12 @@ const SectionPresentation = () => {
           <span className="item">Kovsky</span>
         </h1>
 
-        <BlockSpan id="blockSpan">
-          <span className="item" />
-          <span className="item" />
-        </BlockSpan>
         <div className="relative wrap-fonction">
-          <h2 id="fonction" className="fonction">
-            Front-end web developer
-          </h2>
-          <p id="fonction" className="fonction smaller">
-            & Overwatch Master
-          </p>
+          <Fonction id="fonction">
+            Creative front-end
+            <br />
+            web developer
+          </Fonction>
         </div>
       </div>
 

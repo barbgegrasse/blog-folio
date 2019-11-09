@@ -40,11 +40,15 @@ const BlockSpan = styled('div')`
     border-radius: 5px;
     background-color: ${colors.blue900};
     cursor: pointer;
+    transition: background-color 0.3s linear;
     &:first-child {
       margin-bottom: 15px;
     }
     &:last-child {
       margin-left: 54px;
+    }
+    &:hover {
+      background-color: ${colors.pink900};
     }
   }
 `
@@ -643,17 +647,13 @@ class FullpageWrapper extends React.Component {
         '#moveProjectItem2',
         0.2,
         {
-          marginLeft: 74,
+          marginLeft: 70,
           ease: Power4.easeInOut,
         },
         '+=0.4'
       )
       .to('#moveProjectItem2', 0.2, {
         marginLeft: 54,
-        ease: Power4.easeInOut,
-      })
-      .to('#moveProjectItem2', 0.2, {
-        marginLeft: 74,
         ease: Power4.easeInOut,
       })
 
