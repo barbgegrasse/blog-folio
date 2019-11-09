@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
+import colors from '../styles/colors'
 
 const MainNav = styled('nav')`
   position: fixed;
@@ -22,43 +23,11 @@ const MainNav = styled('nav')`
     margin-right: 25px;
     text-decoration: none;
     color: #0f0350;
+    &.active {
+      color: ${colors.pink900};
+    }
   }
 `
-const Span = styled('span')`
-  display: block;
-`
-
-/*
-const LayoutIndex = ({ children }) => (
-    <StaticQuery
-        query={graphql`
-            query SiteTitleQueryIndex {
-                site {
-                    siteMetadata {
-                        title
-                    }
-                }
-            }
-        `}
-        render={data => (
-            <>
-            {console.log("test layout")}
-                <div style="bg-fixed-home"></div>
-                <Global styles={[globalStyles, typeStyles]} />
-                <div className="Layout LayoutIndex">
-                    <Header />
-                    <main className="Layout__content">
-                        {children}
-                    </main>
-                    <Footer />
-                </div>
-            </>
-        )}
-    />
-)
-
-<Span css={{ color: mainColor }}>Présentation</Span>
-*/
 
 const LayoutIndex = ({ children, mainColor }) => {
   return (
@@ -66,24 +35,20 @@ const LayoutIndex = ({ children, mainColor }) => {
       <header className="header">
         <MainNav id="mainmenu">
           <a
+            title="presentation"
             href="#presentation"
             data-menuanchor="presentation"
             className="active"
           >
-            <Span>Présentation</Span>
+            Présentation
           </a>
-          <a href="#portfolio" data-menuanchor="portfolio">
-            <Span>Portfolio</Span>
+          <a title="Portfolio" href="#portfolio" data-menuanchor="portfolio">
+            Portfolio
           </a>
-          <a href="#contact" data-menuanchor="contact">
-            <Span>Contact</Span>
+          <a title="Contact" href="#contact" data-menuanchor="contact">
+            Contact
           </a>
-          <Link activeClassName="Link--is-active" to="/blog">
-            <Span>Blog</Span>
-          </Link>
-          <Link activeClassName="Link--is-active" to="/mentions-legales">
-            <Span>Mentions légales</Span>
-          </Link>
+          <Link to="/blog">Blog</Link>
         </MainNav>
       </header>
       <main>{children}</main>

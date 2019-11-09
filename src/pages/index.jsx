@@ -4,7 +4,7 @@ import ReactFullpage from '@fullpage/react-fullpage'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { graphql } from 'gatsby'
-import { TimelineLite, Power1, Power2, Power4 } from 'gsap'
+import { TimelineLite, TimelineMax, Power1, Power2, Power4, Bounce } from 'gsap'
 import styled from '@emotion/styled'
 import LayoutIndex from '../components/LayoutIndex'
 import dimensions from '../styles/dimensions'
@@ -19,12 +19,14 @@ import SectionProjects from '../components/Home/SectionProjects'
 import SectionContact from '../components/Home/SectionContact'
 import ProjectCard from '../components/Home/ProjectCard'
 import ProjectCounter from '../components/Home/ProjectCounter'
+import colors from '../styles/colors'
 
 const anchors = ['presentation', 'portfolio', 'contact']
 const animateAnchor = false
 
 const BlockSpan = styled('div')`
-  z-index: 800;
+  transform: scale(0);
+  z-index: 400;
   position: absolute;
   top: 395px;
   @media (max-width: ${dimensions.maxwidthMacBook}px) {
@@ -34,9 +36,10 @@ const BlockSpan = styled('div')`
   .item {
     display: block;
     width: 88px;
-    height: 4px;
+    height: 8px;
     border-radius: 5px;
     background-color: #ce265d;
+    cursor: pointer;
     &:first-child {
       margin-bottom: 15px;
     }
@@ -106,7 +109,7 @@ class FullpageWrapper extends React.Component {
       })
       .to('#fullpage', 1, {
         backgroundImage:
-          '-webkit-linear-gradient(112deg, #0f0350 65%, #ffffff 50%)',
+          '-webkit-linear-gradient(112deg, #0f0350 73%, #ffffff 50%)',
         ease: Power1.easeInOut,
       })
       // .to('#fullpage', 1, {backgroundImage:"-webkit-linear-gradient(112deg, rgb(206, 38, 93) 34%, #0f0350 34%)", ease: Power1.easeInOut},'-=0.4')
@@ -155,6 +158,23 @@ class FullpageWrapper extends React.Component {
     const prevProject = currentProject - 1
     // retourne  faux si pas de projet précédent
     if (prevProject < 0) {
+      // Si pas de projet précédent j'annime le premier bouton "précédent"
+      const noProject = new TimelineMax({
+        paused: true,
+        delay: 0,
+        repeat: 1,
+        yoyo: true,
+      })
+
+      noProject.to('#moveProjectItem1', 0.1, {
+        xPercent: -10,
+        ease: Power1.easeInOut,
+      })
+      noProject.to('#moveProjectItem1', 0.1, {
+        xPercent: 0,
+        ease: Power1.easeInOut,
+      })
+      noProject.play()
       return false
     }
     const currentProjectSlug = projects[currentProject].slug
@@ -373,6 +393,23 @@ class FullpageWrapper extends React.Component {
     const nextProject = currentProject + 1
 
     if (nextProject === this.totalProjects) {
+      // Si pas de projet suivant j'annime le second bouton "suivant"
+      const noProject = new TimelineMax({
+        paused: true,
+        delay: 0,
+        repeat: 1,
+        yoyo: true,
+      })
+
+      noProject.to('#moveProjectItem2', 0.1, {
+        xPercent: -10,
+        ease: Power1.easeInOut,
+      })
+      noProject.to('#moveProjectItem2', 0.1, {
+        xPercent: 0,
+        ease: Power1.easeInOut,
+      })
+      noProject.play()
       return false
     }
 
@@ -380,8 +417,6 @@ class FullpageWrapper extends React.Component {
     const nextProjectSlug = projects[nextProject].slug
     const { color } = projects[nextProject]
     const ggGoNext = new TimelineLite()
-
-    console.log(currentProject, nextProject, this.totalProjects)
 
     ggGoNext
       // .addLabel(`debutanim${currentProject}`)
@@ -591,7 +626,7 @@ class FullpageWrapper extends React.Component {
 
   render() {
     const { currentProject, dispatch } = this.props
-    const delay = 900 // milliseconds
+    const delay = 800 // temps avant de déclencher l'animation pour la partie folio
     let timeoutId
     let animationIsFinished = false
     return (
@@ -605,13 +640,19 @@ class FullpageWrapper extends React.Component {
           navigation
           navigationPosition="left"
           onLeave={(origin, destination, direction) => {
+            // On quitte le premier slide
             if (origin.index === 0) {
-              // On quitte le premier slide
+              // On enleve la classe active du premier élément présentation
+              const currentItem = document.querySelector(
+                '#mainmenu a:nth-child(1)'
+              )
+              currentItem.classList.remove('active')
 
+              // On met en surbrillance le second élément de menu
               const activeItem = document.querySelector(
                 '#mainmenu a:nth-child(2)'
               )
-              activeItem.style.color = '#d41e38'
+              activeItem.style.color = this.state.projectList[0].color
 
               new TimelineLite()
                 .addLabel('leaveOne')
@@ -656,7 +697,7 @@ class FullpageWrapper extends React.Component {
                   {
                     backgroundImage:
                       '-webkit-linear-gradient(180deg, rgb(206, 38, 93) 34%, #ffffff 34%)',
-                    ease: Power1.easeInOut,
+                    ease: Power4.easeInOut,
                   },
                   'leaveOne'
                 )
@@ -676,14 +717,26 @@ class FullpageWrapper extends React.Component {
 
               if (this.state.animProject) {
                 new TimelineLite()
-                  .to('.movetrait', 0.8, {
+                  .to('.bloc-presentation', 0, {
                     xPercent: 100,
+                    left: '11%',
                     ease: Power4.easeInOut,
                   })
                   .to(
+                    '.background-image.current',
+                    1.5,
+                    {
+                      marginLeft: 0,
+                      ease: Power4.easeInOut,
+                    },
+                    '+=1.4'
+                  )
+
+                  .to(
                     `.${this.state.projectList[0].slug} .title-project`,
                     0.8,
-                    { xPercent: 100, ease: Power4.easeInOut }
+                    { xPercent: 100, ease: Power4.easeInOut },
+                    '-=1.3'
                   )
                   .to(
                     `.${this.state.projectList[0].slug} .block-span`,
@@ -715,6 +768,48 @@ class FullpageWrapper extends React.Component {
                     { xPercent: 100, ease: Power4.easeInOut },
                     '-=0.7'
                   )
+                  .to('#moveProject', 0.8, {
+                    scale: 1,
+                    ease: Bounce.easeOut,
+                  })
+                  .to('#moveProjectItem2', 0.2, {
+                    marginLeft: 74,
+                    ease: Power4.easeInOut,
+                  })
+                  .to('#moveProjectItem2', 0.2, {
+                    marginLeft: 54,
+                    ease: Power4.easeInOut,
+                  })
+                  .to('#moveProjectItem2', 0.2, {
+                    marginLeft: 74,
+                    ease: Power4.easeInOut,
+                  })
+                  .to('#moveProjectItem2', 0.2, {
+                    marginLeft: 54,
+                    ease: Power4.easeInOut,
+                  })
+
+                  .to(
+                    '#moveProjectItem2',
+                    0.2,
+                    {
+                      marginLeft: 74,
+                      ease: Power4.easeInOut,
+                    },
+                    '+=0.4'
+                  )
+                  .to('#moveProjectItem2', 0.2, {
+                    marginLeft: 54,
+                    ease: Power4.easeInOut,
+                  })
+                  .to('#moveProjectItem2', 0.2, {
+                    marginLeft: 74,
+                    ease: Power4.easeInOut,
+                  })
+                  .to('#moveProjectItem2', 0.2, {
+                    marginLeft: 54,
+                    ease: Power4.easeInOut,
+                  })
 
                 this.setState({ animProject: false })
               }
@@ -726,7 +821,7 @@ class FullpageWrapper extends React.Component {
                 animationIsFinished = true
 
                 if (direction === 'down') {
-                  this.fullPageApi.moveSectionDown()
+                  this.fullPageApi.moveTo(destination.index + 1)
                 } else {
                   // this.fullPageApi.moveSectionUp()
                 }
@@ -737,6 +832,18 @@ class FullpageWrapper extends React.Component {
 
             // Si je retourne sur le premier slide
             if (destination.index === 0) {
+              // On ajoute la classe active sur le premier élément de présentation
+              const currentItem = document.querySelector(
+                '#mainmenu a:nth-child(1)'
+              )
+              currentItem.classList.add('active')
+
+              // On réinitialise la couleur
+              const activeItem = document.querySelector(
+                '#mainmenu a:nth-child(2)'
+              )
+              activeItem.style.color = colors.blue900
+
               new TimelineLite()
                 .to('#wrapMoon', 0.3, {
                   left: '50%',
@@ -782,18 +889,19 @@ class FullpageWrapper extends React.Component {
                   'leaveOne'
                 )
             }
+            return true
           }}
           render={({ fullpageApi }) => {
             this.fullPageApi = fullpageApi
-            // console.log(this.state.projectList)
             return (
               <>
                 <div>
                   <SectionPresentation />
                   <SectionProjects>
                     <>
-                      <BlockSpan>
+                      <BlockSpan id="moveProject">
                         <span
+                          id="moveProjectItem1"
                           className="item"
                           aria-label="Précédent"
                           role="button"
@@ -802,6 +910,7 @@ class FullpageWrapper extends React.Component {
                           onKeyUp={this.clickPrev}
                         />
                         <span
+                          id="moveProjectItem2"
                           className="item"
                           aria-label="Suivant"
                           role="button"
@@ -825,6 +934,7 @@ class FullpageWrapper extends React.Component {
                       <ProjectCounter />
                     </>
                   </SectionProjects>
+                  <SectionContact />
                 </div>
               </>
             )

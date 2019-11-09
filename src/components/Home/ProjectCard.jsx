@@ -8,8 +8,8 @@ const BlocPresentation = styled('div')`
   z-index: 200;
   position: absolute;
   top: 50%;
-  left: 11%;
-  transform: translate(0, -50%);
+  left: 0;
+  transform: translate(-100%, -50%);
   overflow: hidden;
   &.project1 {
     z-index: 300;
@@ -36,7 +36,7 @@ const BackgroundImage = styled('div')`
   background-size: cover;
   margin-left: 100%;
   &.current {
-    margin-left: 0;
+    /* margin-left: 0; */
   }
 
   @media (max-width: ${dimensions.maxwidthMacBook}px) {

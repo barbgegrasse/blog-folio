@@ -22,7 +22,7 @@ const BlockSpan = styled('div')`
 
 const SectionPresentation = () => {
   return (
-    <div className="section section1">
+    <div className="section section1" data-anchor="presentation">
       <div id="blockPresentation" className="block-presentation">
         <h1 id="mainTitle" className="main-title">
           <span className="item">Johan</span>
