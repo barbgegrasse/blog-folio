@@ -38,7 +38,7 @@ const BlockSpan = styled('div')`
     width: 88px;
     height: 8px;
     border-radius: 5px;
-    background-color: #ce265d;
+    background-color: ${colors.blue900};
     cursor: pointer;
     &:first-child {
       margin-bottom: 15px;
@@ -50,6 +50,14 @@ const BlockSpan = styled('div')`
 `
 
 class FullpageWrapper extends React.Component {
+  static switchColor(colorItem) {
+    const activeItem = document.querySelector('#mainmenu a:nth-child(2)')
+    activeItem.style.color = colorItem
+
+    const miniLogo = document.querySelector('#miniLogo')
+    miniLogo.style.backgroundColor = colorItem
+  }
+
   constructor(props) {
     super(props)
     this.clickNext = this.clickNext.bind(this)
@@ -143,12 +151,6 @@ class FullpageWrapper extends React.Component {
       )
       .to('#wrapLogo', 1, { left: '50%', ease: Power1.easeInOut }, 'ouverture')
       .addLabel('firstSlideOver')
-  }
-
-  activeMenu(colorItem) {
-    console.log('color item', colorItem)
-    const activeItem = document.querySelector('#mainmenu a:nth-child(2)')
-    activeItem.style.color = colorItem
   }
 
   clickPrev() {
@@ -310,7 +312,7 @@ class FullpageWrapper extends React.Component {
       .call(
         // eslint-disable-next-line func-names
         function() {
-          this.activeMenu(color)
+          FullpageWrapper.switchColor(color)
         },
         null,
         this,
@@ -548,7 +550,7 @@ class FullpageWrapper extends React.Component {
       .call(
         // eslint-disable-next-line func-names
         function() {
-          this.activeMenu(color)
+          FullpageWrapper.switchColor(color)
         },
         null,
         this,
@@ -821,7 +823,8 @@ class FullpageWrapper extends React.Component {
                 animationIsFinished = true
 
                 if (direction === 'down') {
-                  this.fullPageApi.moveTo(destination.index + 1)
+                  // this.fullPageApi.moveTo(destination.index + 1)
+                  this.fullPageApi.moveTo('portfolio', 1)
                 } else {
                   // this.fullPageApi.moveSectionUp()
                 }
@@ -883,12 +886,20 @@ class FullpageWrapper extends React.Component {
                   1,
                   {
                     backgroundImage:
-                      'webkit-linear-gradient(112deg, rgb(15, 3, 80) 65%, rgb(255, 255, 255) 50%)',
+                      'webkit-linear-gradient(112deg, rgb(15, 3, 80) 73%, rgb(255, 255, 255) 50%)',
                     ease: Power1.easeInOut,
                   },
                   'leaveOne'
                 )
             }
+
+            if (destination.index === 2) {
+              // this.fullPageApi.moveTo('portfolio', 1)
+              const currentProject = this.state.currentProject
+
+              console.log('destination index 1 current project', currentProject)
+            }
+
             return true
           }}
           render={({ fullpageApi }) => {
