@@ -104,6 +104,16 @@ class FullpageWrapper extends React.Component {
       ],
       animProject: true,
     }
+    this.animButtons = new TimelineMax({
+      paused: true,
+      delay: 1,
+      repeat: -1,
+      yoyo: true,
+    })
+
+    // Cette liaison est nécéssaire afin de permettre
+    // l'utilisation de `this` dans la fonction de rappel.
+    this.stopButtons = this.stopButtons.bind(this)
   }
 
   componentDidMount() {
@@ -626,6 +636,34 @@ class FullpageWrapper extends React.Component {
     return true
   }
 
+  // J'anime mes boutons quand j'arrive dans la section projet
+  moveButtons() {
+    this.animButtons
+      .to(
+        '#moveProjectItem2',
+        0.2,
+        {
+          marginLeft: 74,
+          ease: Power4.easeInOut,
+        },
+        '+=0.4'
+      )
+      .to('#moveProjectItem2', 0.2, {
+        marginLeft: 54,
+        ease: Power4.easeInOut,
+      })
+      .to('#moveProjectItem2', 0.2, {
+        marginLeft: 74,
+        ease: Power4.easeInOut,
+      })
+
+    this.animButtons.play()
+  }
+
+  stopButtons() {
+    this.animButtons.clear()
+  }
+
   render() {
     const { currentProject, dispatch } = this.props
     const delay = 800 // temps avant de déclencher l'animation pour la partie folio
@@ -774,45 +812,8 @@ class FullpageWrapper extends React.Component {
                     scale: 1,
                     ease: Bounce.easeOut,
                   })
-                  .to('#moveProjectItem2', 0.2, {
-                    marginLeft: 74,
-                    ease: Power4.easeInOut,
-                  })
-                  .to('#moveProjectItem2', 0.2, {
-                    marginLeft: 54,
-                    ease: Power4.easeInOut,
-                  })
-                  .to('#moveProjectItem2', 0.2, {
-                    marginLeft: 74,
-                    ease: Power4.easeInOut,
-                  })
-                  .to('#moveProjectItem2', 0.2, {
-                    marginLeft: 54,
-                    ease: Power4.easeInOut,
-                  })
 
-                  .to(
-                    '#moveProjectItem2',
-                    0.2,
-                    {
-                      marginLeft: 74,
-                      ease: Power4.easeInOut,
-                    },
-                    '+=0.4'
-                  )
-                  .to('#moveProjectItem2', 0.2, {
-                    marginLeft: 54,
-                    ease: Power4.easeInOut,
-                  })
-                  .to('#moveProjectItem2', 0.2, {
-                    marginLeft: 74,
-                    ease: Power4.easeInOut,
-                  })
-                  .to('#moveProjectItem2', 0.2, {
-                    marginLeft: 54,
-                    ease: Power4.easeInOut,
-                  })
-
+                this.moveButtons()
                 this.setState({ animProject: false })
               }
 
@@ -910,7 +911,10 @@ class FullpageWrapper extends React.Component {
                   <SectionPresentation />
                   <SectionProjects>
                     <>
-                      <BlockSpan id="moveProject">
+                      <BlockSpan
+                        id="moveProject"
+                        onMouseEnter={this.stopButtons}
+                      >
                         <span
                           id="moveProjectItem1"
                           className="item"
