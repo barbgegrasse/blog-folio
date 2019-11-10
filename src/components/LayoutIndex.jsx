@@ -34,10 +34,11 @@ const MainNav = styled('nav')`
 `
 
 const MiniLogo = styled('div')`
+  opacity: 0;
   position: fixed;
   z-index: 20;
   top: 10px;
-  left: 11%;
+  left: -11%;
 
   display: block;
   width: 80px;
@@ -73,7 +74,7 @@ const LayoutIndex = ({ children, mainColor }) => {
   return (
     <div className="container">
       <header className="header">
-        <MiniLogo id="miniLogo">
+        <MiniLogo id="miniLogo" style={{ backgroundColor: mainColor }}>
           <ChevronContainer>
             <Chevron />
           </ChevronContainer>
@@ -87,7 +88,12 @@ const LayoutIndex = ({ children, mainColor }) => {
           >
             Présentation
           </a>
-          <a title="Portfolio" href="#portfolio" data-menuanchor="portfolio">
+          <a
+            title="Portfolio"
+            style={{ color: mainColor }}
+            href="#portfolio"
+            data-menuanchor="portfolio"
+          >
             Portfolio
           </a>
           <a title="Contact" href="#contact" data-menuanchor="contact">

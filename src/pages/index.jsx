@@ -55,11 +55,15 @@ const BlockSpan = styled('div')`
 
 class FullpageWrapper extends React.Component {
   static switchColor(colorItem) {
-    const activeItem = document.querySelector('#mainmenu a:nth-child(2)')
-    activeItem.style.color = colorItem
+    // const activeItem = document.querySelector('#mainmenu a:nth-child(2)')
+    // activeItem.style.color = colorItem
+    // const miniLogo = document.querySelector('#miniLogo')
+    // miniLogo.style.backgroundColor = colorItem
+  }
 
-    const miniLogo = document.querySelector('#miniLogo')
-    miniLogo.style.backgroundColor = colorItem
+  static handleOut(event) {
+    const el = event.target
+    el.style.backgroundColor = colors.blue900
   }
 
   constructor(props) {
@@ -91,7 +95,7 @@ class FullpageWrapper extends React.Component {
           id: 2,
           name: 'Redd',
           slug: 'redd',
-          color: '#003057',
+          color: '#6da1ff',
           siteweb: 'http://lefive.fr',
           current: '',
           image: this.props.data.thalasso.childImageSharp.fluid.src,
@@ -118,6 +122,7 @@ class FullpageWrapper extends React.Component {
     // Cette liaison est nécéssaire afin de permettre
     // l'utilisation de `this` dans la fonction de rappel.
     this.stopButtons = this.stopButtons.bind(this)
+    this.handleHover = this.handleHover.bind(this)
   }
 
   componentDidMount() {
@@ -165,6 +170,11 @@ class FullpageWrapper extends React.Component {
       )
       .to('#wrapLogo', 1, { left: '50%', ease: Power1.easeInOut }, 'ouverture')
       .addLabel('firstSlideOver')
+  }
+
+  handleHover(event) {
+    const el = event.target
+    el.style.backgroundColor = this.props.mainColor
   }
 
   clickPrev() {
@@ -394,6 +404,21 @@ class FullpageWrapper extends React.Component {
         { scaleX: 1, scaleY: 1, ease: Power4.easeInOut },
         '-=0.4'
       )
+      // On change la classe current qui gère le z-index sur la partie desc
+      .set(`.bloc-presentation.project-${currentProjectSlug}`, {
+        className: '-=current',
+      })
+      .set(`.bloc-presentation.project-${prevProjectSlug}`, {
+        className: '+=current',
+      })
+
+      // On change la classe current qui gère le z-index sur la partie image
+      .set(`.illu-project-wrapper.project-${currentProjectSlug}`, {
+        className: '-=current',
+      })
+      .set(`.illu-project-wrapper.project-${prevProjectSlug}`, {
+        className: '+=current',
+      })
 
     this.state.currentProject = prevProject
 
@@ -631,6 +656,23 @@ class FullpageWrapper extends React.Component {
         { scaleX: 1, scaleY: 1, ease: Power4.easeInOut },
         '-=0.4'
       )
+
+      // On change la classe current qui gère le z-index
+      .set(`.bloc-presentation.project-${currentProjectSlug}`, {
+        className: '-=current',
+      })
+      .set(`.bloc-presentation.project-${nextProjectSlug}`, {
+        className: '+=current',
+      })
+
+      // On change la classe current qui gère le z-index sur la partie image
+      .set(`.illu-project-wrapper.project-${currentProjectSlug}`, {
+        className: '-=current',
+      })
+      .set(`.illu-project-wrapper.project-${nextProjectSlug}`, {
+        className: '+=current',
+      })
+
       .addLabel(`finanim${currentProject}`)
 
     this.state.currentProject = nextProject
@@ -741,6 +783,16 @@ class FullpageWrapper extends React.Component {
                   },
                   'leaveOne'
                 )
+                .to(
+                  '#miniLogo',
+                  0.5,
+                  {
+                    left: '11%',
+                    opacity: 1,
+                    ease: Power4.easeInOut,
+                  },
+                  'leaveOne+=2'
+                )
                 // Changement de couleur du state
 
                 .call(
@@ -757,6 +809,7 @@ class FullpageWrapper extends React.Component {
 
               if (this.state.animProject) {
                 new TimelineLite()
+
                   .to('.bloc-presentation', 0, {
                     xPercent: 100,
                     left: '11%',
@@ -834,6 +887,11 @@ class FullpageWrapper extends React.Component {
               return animationIsFinished
             }
 
+            // On quiite le second slide
+            if (origin.index === 1) {
+              this.props.dispatch(setColor(colors.pink900))
+            }
+
             // Si je retourne sur le premier slide
             if (destination.index === 0) {
               // On ajoute la classe active sur le premier élément de présentation
@@ -897,8 +955,6 @@ class FullpageWrapper extends React.Component {
             if (destination.index === 2) {
               // this.fullPageApi.moveTo('portfolio', 1)
               const currentProject = this.state.currentProject
-
-              console.log('destination index 1 current project', currentProject)
             }
 
             return true
@@ -923,6 +979,10 @@ class FullpageWrapper extends React.Component {
                           tabIndex={0}
                           onClick={this.clickPrev}
                           onKeyUp={this.clickPrev}
+                          onMouseOver={this.handleHover}
+                          onFocus={this.handleHover}
+                          onMouseOut={ProjectCard.handleOut}
+                          onBlur={ProjectCard.handleOut}
                         />
                         <span
                           id="moveProjectItem2"
@@ -932,6 +992,10 @@ class FullpageWrapper extends React.Component {
                           tabIndex={0}
                           onClick={this.clickNext}
                           onKeyDown={this.clickNext}
+                          onMouseOver={this.handleHover}
+                          onFocus={this.handleHover}
+                          onMouseOut={ProjectCard.handleOut}
+                          onBlur={ProjectCard.handleOut}
                         />
                       </BlockSpan>
                       {this.state.projectList.map(project => {

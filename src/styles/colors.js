@@ -2,7 +2,7 @@
 const colors = {
   white100: '#F9FFEE', // Main text
 
-  blue900: '#192c4c',
+  blue900: '#0f0350', // Bleu site principal
   blue800: '#2a4a7f',
   blue700: '#3a67b2',
   blue600: '#4b84e5',

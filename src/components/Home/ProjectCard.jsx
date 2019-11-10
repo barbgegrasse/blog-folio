@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { TimelineLite, Power4 } from 'gsap'
 import styled from '@emotion/styled'
+import colors from '../../styles/colors'
 import dimensions from '../../styles/dimensions'
 
 const BlocPresentation = styled('div')`
@@ -11,18 +13,25 @@ const BlocPresentation = styled('div')`
   left: 0;
   transform: translate(-100%, -50%);
   overflow: hidden;
-  &.project1 {
+  &.current {
     z-index: 300;
   }
 `
 const BackgroundImageWrap = styled('div')`
   overflow: hidden;
   position: absolute;
+  z-index: 100;
   right: 10%;
   top: 50%;
 
   width: 1020px;
   transform: translateY(-50%);
+
+  mix-blend-mode: luminosity;
+
+  &.current {
+    z-index: 150;
+  }
 
   @media (max-width: ${dimensions.maxwidthMacBook}px) {
     width: 600px;
@@ -35,9 +44,6 @@ const BackgroundImage = styled('div')`
   height: 720px;
   background-size: cover;
   margin-left: 100%;
-  &.current {
-    /* margin-left: 0; */
-  }
 
   @media (max-width: ${dimensions.maxwidthMacBook}px) {
     height: 537px;
@@ -78,17 +84,54 @@ const LinkProject = styled('a')`
   margin-top: 40px;
   border-radius: 25px;
 
-  background: #ce265d;
+  background: ${colors.blue900};
   color: #fff;
 
   font-weight: 800;
   font-size: 23px;
   text-decoration: none;
+
+  transition: background-color 0.3s linear;
 `
 
 class ProjectCard extends Component {
-  componentDidMount() {
-    // empty
+  static handleOut(event) {
+    const el = event.target
+    el.style.backgroundColor = colors.blue900
+  }
+
+  constructor(props) {
+    super(props)
+    this.handleHoverLink = this.handleHoverLink.bind(this)
+    this.handleHoverImage = this.handleHoverImage.bind(this)
+    this.handleOutImage = this.handleOutImage.bind(this)
+  }
+
+  handleHoverLink(event) {
+    const el = event.target
+    el.style.backgroundColor = this.props.color
+  }
+
+  handleHoverImage() {
+    // Animation du background
+    const animBgIn = new TimelineLite()
+    animBgIn.to('#fullpage', 0.5, {
+      backgroundImage: `-webkit-linear-gradient(180deg, ${this.props.color} 50%, #ffffff 34%)`,
+      ease: Power4.easeInOut,
+    })
+    animBgIn.play()
+    console.log('handle over image')
+  }
+
+  handleOutImage() {
+    // Animation du background
+    const animBgOut = new TimelineLite()
+    animBgOut.to('#fullpage', 0.5, {
+      backgroundImage: `-webkit-linear-gradient(180deg, ${this.props.color} 34%, #ffffff 34%)`,
+      ease: Power4.easeInOut,
+    })
+    animBgOut.play()
+    console.log('handle out image')
   }
 
   render() {
@@ -113,14 +156,23 @@ class ProjectCard extends Component {
 
           <LinkProject
             className="link-project"
-            css={{ background: color }}
             href={siteweb}
+            onMouseOver={this.handleHoverLink}
+            onFocus={this.handleHoverLink}
+            onMouseOut={ProjectCard.handleOut}
+            onBlur={ProjectCard.handleOut}
           >
             Découvrir le projet en ligne
           </LinkProject>
         </BlocPresentation>
 
-        <BackgroundImageWrap className={`illu-project-wrapper project-${slug}`}>
+        <BackgroundImageWrap
+          onMouseOver={this.handleHoverImage}
+          onFocus={this.handleHoverImage}
+          onMouseOut={this.handleOutImage}
+          onBlur={this.handleOutImageImage}
+          className={`illu-project-wrapper project-${slug} ${current}`}
+        >
           <BackgroundImage
             className={`background-image ${current} project-${slug}`}
             css={{ backgroundImage: `url(${image})` }}
@@ -142,7 +194,4 @@ export default connect(
 ProjectCard.propTypes = {
   mainColor: PropTypes.element.isRequired,
   project: PropTypes.element.isRequired,
-  // currentProject: PropTypes.element.isRequired,
-  // totalProjects: PropTypes.element.isRequired,
-  // dispatch: PropTypes.element.isRequired,
 }

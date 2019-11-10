@@ -1,13 +1,9 @@
-import React, { Children } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 const SectionProjects = ({ children }) => {
   return (
-    <div
-      id="projectKovsky"
-      data-anchor="portfolio"
-      className="projects section section2"
-    >
+    <div data-anchor="portfolio" className="projects section section2">
       {children}
     </div>
   )
