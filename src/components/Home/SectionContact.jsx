@@ -99,11 +99,6 @@ const SectionContact = () => {
   return (
     <div className="section section3 contact" data-anchor="contact">
       <ContactWrapper>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed deserunt
-        alias quo obcaecati inventore pariatur eligendi omnis quis porro quam.
-        Quas velit impedit, harum pariatur libero veniam fuga vel sint!
-        {/* 
-        <Title>Contact</Title>
         <form
           id="formContact"
           name="contact"
