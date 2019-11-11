@@ -102,7 +102,6 @@ const SectionContact = () => {
         <Title>Contact</Title>
         <form
           id="formContact"
-          className="contact-form row"
           name="contact"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
