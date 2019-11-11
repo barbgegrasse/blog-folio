@@ -5,6 +5,7 @@ import { TimelineLite, Power4 } from 'gsap'
 import styled from '@emotion/styled'
 import colors from '../../styles/colors'
 import dimensions from '../../styles/dimensions'
+import fonts from '../../styles/fonts'
 
 const BlocPresentation = styled('div')`
   z-index: 200;
@@ -27,7 +28,7 @@ const BackgroundImageWrap = styled('div')`
   width: 1020px;
   transform: translateY(-50%);
 
-  mix-blend-mode: luminosity;
+  /* mix-blend-mode: luminosity; */
 
   &.current {
     z-index: 150;
@@ -70,27 +71,25 @@ const DescProject = styled('p')`
 
 const Technos = styled('span')`
   display: block;
-  font-size: 30px;
+  font-size: 27px;
   color: #0f0350;
   margin-top: 40px;
   font-family: 'Share Tech Mono';
 `
 
 const LinkProject = styled('a')`
-  display: block;
-  transform: translate(-101%, 0);
-  padding: 15px 20px;
-  max-width: 390px;
+  display: inline-block;
+  transform: translate(-100%, 0);
+  padding: 10px 15px;
   margin-top: 40px;
-  border-radius: 25px;
 
-  background: ${colors.blue900};
+  font-family: ${fonts.Share};
   color: #fff;
-
-  font-weight: 800;
-  font-size: 23px;
+  font-weight: 200;
+  font-size: 18px;
   text-decoration: none;
 
+  background: ${colors.blue900};
   transition: background-color 0.3s linear;
 `
 
@@ -120,7 +119,6 @@ class ProjectCard extends Component {
       ease: Power4.easeInOut,
     })
     animBgIn.play()
-    console.log('handle over image')
   }
 
   handleOutImage() {
@@ -131,7 +129,6 @@ class ProjectCard extends Component {
       ease: Power4.easeInOut,
     })
     animBgOut.play()
-    console.log('handle out image')
   }
 
   render() {

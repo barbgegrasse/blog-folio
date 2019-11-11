@@ -13,6 +13,7 @@ const Count = styled('div')`
     position: relative;
     overflow: hidden;
     padding-right: 56px;
+    z-index: 250;
     .item {
       position: absolute;
       right: 0;

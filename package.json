@@ -6,6 +6,7 @@
   "author": "Marguerite Roth | marguerite.io | marguerite.roth@gmail.com",
   "dependencies": {
     "@emotion/core": "^10.0.21",
+    "@emotion/css": "^10.0.22",
     "@emotion/styled": "^10.0.17",
     "@fullpage/react-fullpage": "^0.1.16",
     "emotion-media-query": "^1.0.1",

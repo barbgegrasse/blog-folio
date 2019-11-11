@@ -21,9 +21,6 @@ import ProjectCard from '../components/Home/ProjectCard'
 import ProjectCounter from '../components/Home/ProjectCounter'
 import colors from '../styles/colors'
 
-const anchors = ['presentation', 'portfolio', 'contact']
-const animateAnchor = false
-
 const BlockSpan = styled('div')`
   transform: scale(0);
   z-index: 400;
@@ -36,8 +33,7 @@ const BlockSpan = styled('div')`
   .item {
     display: block;
     width: 88px;
-    height: 8px;
-    border-radius: 5px;
+    height: 12px;
     background-color: ${colors.blue900};
     cursor: pointer;
     transition: background-color 0.3s linear;
@@ -53,14 +49,14 @@ const BlockSpan = styled('div')`
   }
 `
 
-class FullpageWrapper extends React.Component {
-  static switchColor(colorItem) {
-    // const activeItem = document.querySelector('#mainmenu a:nth-child(2)')
-    // activeItem.style.color = colorItem
-    // const miniLogo = document.querySelector('#miniLogo')
-    // miniLogo.style.backgroundColor = colorItem
-  }
+const pluginWrapper = () => {
+  require('../plugins/fullpage.resetSliders.min.js')
+}
 
+const anchors = ['presentation', 'portfolio', 'contact']
+const animateAnchor = false
+
+class FullpageWrapper extends React.Component {
   static handleOut(event) {
     const el = event.target
     el.style.backgroundColor = colors.blue900
@@ -221,8 +217,7 @@ class FullpageWrapper extends React.Component {
         '#fullpage',
         0.5,
         {
-          backgroundImage:
-            '-webkit-linear-gradient(180deg, rgb(206, 38, 93) 50%, #ffffff 34%)',
+          backgroundImage: `-webkit-linear-gradient(180deg, ${this.state.projectList[currentProject].color} 50%, #ffffff 34%)`,
           ease: Power4.easeInOut,
         },
         `moveBackground${currentProject}`
@@ -328,15 +323,6 @@ class FullpageWrapper extends React.Component {
         // eslint-disable-next-line func-names
         function() {
           this.dispatch(setColor(color))
-        },
-        null,
-        this,
-        '-=2'
-      )
-      .call(
-        // eslint-disable-next-line func-names
-        function() {
-          FullpageWrapper.switchColor(color)
         },
         null,
         this,
@@ -473,8 +459,7 @@ class FullpageWrapper extends React.Component {
         '#fullpage',
         0.5,
         {
-          backgroundImage:
-            '-webkit-linear-gradient(180deg, rgb(206, 38, 93) 50%, #ffffff 34%)',
+          backgroundImage: `-webkit-linear-gradient(180deg, ${this.state.projectList[currentProject].color} 50%, #ffffff 34%)`,
           ease: Power4.easeInOut,
         },
         `moveBackground${currentProject}`
@@ -586,18 +571,7 @@ class FullpageWrapper extends React.Component {
         '-=2'
       )
 
-      .call(
-        // eslint-disable-next-line func-names
-        function() {
-          FullpageWrapper.switchColor(color)
-        },
-        null,
-        this,
-        'leaveOne'
-      )
-
       // mise à jour du counter
-
       .to(
         `.wrap-count .item.project-${currentProjectSlug}`,
         1.2,
@@ -684,6 +658,7 @@ class FullpageWrapper extends React.Component {
 
   // J'anime mes boutons quand j'arrive dans la section projet
   moveButtons() {
+    console.log('moveButtons')
     this.animButtons
       .to(
         '#moveProjectItem2',
@@ -714,16 +689,25 @@ class FullpageWrapper extends React.Component {
     return (
       <LayoutIndex>
         <ReactFullpage
+          pluginWrapper={pluginWrapper}
+          licenseKey="35C013F1-0AFB49AE-99AB6601-C44F38BA"
+          resetSlidersKey="31A7077D-8E0542AF-985B8993-67974543"
+          resetSliders
           anchors={anchors}
+          menu="#mainmenu"
           lockAnchors={false}
-          menu="mainmenu"
           animateAnchor={animateAnchor}
           scrollingSpeed={500}
           navigation
           navigationPosition="left"
+          slidesNavigation={false}
+          slidesNavPosition="bottom"
           onLeave={(origin, destination, direction) => {
             // On quitte le premier slide
             if (origin.index === 0) {
+              const globalColor = this.state.projectList[
+                this.state.currentProject
+              ].color
               // On enleve la classe active du premier élément présentation
               const currentItem = document.querySelector(
                 '#mainmenu a:nth-child(1)'
@@ -734,8 +718,10 @@ class FullpageWrapper extends React.Component {
               const activeItem = document.querySelector(
                 '#mainmenu a:nth-child(2)'
               )
-              activeItem.style.color = this.state.projectList[0].color
+              this.dispatch(setColor(globalColor))
+              activeItem.style.color = globalColor
 
+              // ${this.state.projectList[this.state.currentProject].color}
               new TimelineLite()
                 .addLabel('leaveOne')
                 // On fait bouger le logo
@@ -777,8 +763,7 @@ class FullpageWrapper extends React.Component {
                   '#fullpage',
                   1,
                   {
-                    backgroundImage:
-                      '-webkit-linear-gradient(180deg, rgb(206, 38, 93) 34%, #ffffff 34%)',
+                    backgroundImage: `-webkit-linear-gradient(180deg, ${this.state.projectList[this.state.currentProject].color} 34%, #ffffff 34%)`,
                     ease: Power4.easeInOut,
                   },
                   'leaveOne'
@@ -792,19 +777,6 @@ class FullpageWrapper extends React.Component {
                     ease: Power4.easeInOut,
                   },
                   'leaveOne+=2'
-                )
-                // Changement de couleur du state
-
-                .call(
-                  // eslint-disable-next-line func-names
-                  function() {
-                    this.props.dispatch(
-                      setColor(this.state.projectList[0].color)
-                    )
-                  },
-                  null,
-                  this,
-                  'leaveOne+=2.5'
                 )
 
               if (this.state.animProject) {
@@ -887,13 +859,51 @@ class FullpageWrapper extends React.Component {
               return animationIsFinished
             }
 
-            // On quiite le second slide
-            if (origin.index === 1) {
-              this.props.dispatch(setColor(colors.pink900))
+            // Si je quitte mon slide contact pour remonter sur folio
+            if (destination.index === 1 && origin.index === 2) {
+              // On met à jour le state color global
+              const globalColor = this.state.projectList[
+                this.state.currentProject
+              ].color
+              this.props.dispatch(setColor(globalColor))
+
+              // On enleve la classe troisieme élément contact
+              const currentItem = document.querySelector(
+                '#mainmenu a:nth-child(3)'
+              )
+              currentItem.classList.remove('active')
+              console.log('item 3', currentItem)
+
+              // On met en surbrillance le troisieme élément de menu
+              const activeItem = document.querySelector(
+                '#mainmenu a:nth-child(2)'
+              )
+
+              activeItem.classList.add('active')
+
+              // Animation du background
+              const bgAnim = new TimelineMax({
+                paused: true,
+                delay: 1,
+              })
+
+              bgAnim.to(
+                '#fullpage',
+                1,
+                {
+                  backgroundImage: `-webkit-linear-gradient(180deg, ${this.state.projectList[this.state.currentProject].color} 34%, #ffffff 34%)`,
+                  ease: Power4.easeInOut,
+                },
+                'leaveOne'
+              )
+              bgAnim.play()
             }
 
             // Si je retourne sur le premier slide
             if (destination.index === 0) {
+              const globalColor = colors.pink900
+              this.dispatch(setColor(globalColor))
+
               // On ajoute la classe active sur le premier élément de présentation
               const currentItem = document.querySelector(
                 '#mainmenu a:nth-child(1)'
@@ -952,9 +962,39 @@ class FullpageWrapper extends React.Component {
                 )
             }
 
+            // Si j'arrive sur mon slide contact
             if (destination.index === 2) {
-              // this.fullPageApi.moveTo('portfolio', 1)
-              const currentProject = this.state.currentProject
+              this.props.dispatch(setColor(colors.pink900))
+
+              // On enleve la classe active du second élément présentation
+              const currentItem = document.querySelector(
+                '#mainmenu a:nth-child(2)'
+              )
+              currentItem.classList.remove('active')
+              currentItem.style.color = colors.blue900
+
+              // On met en surbrillance le troisieme élément de menu
+              const activeItem = document.querySelector(
+                '#mainmenu a:nth-child(3)'
+              )
+              activeItem.classList.add('active')
+
+              const bgAnim = new TimelineMax({
+                paused: true,
+                delay: 1,
+              })
+
+              bgAnim.to(
+                '#fullpage',
+                1,
+                {
+                  backgroundImage:
+                    '-webkit-linear-gradient(146deg, rgb(206, 38, 93) 34%, #ffffff 34%)',
+                  ease: Power4.easeInOut,
+                },
+                'leaveOne'
+              )
+              bgAnim.play()
             }
 
             return true
@@ -1058,7 +1098,7 @@ export default connect(
   null
 )(FullpageWrapper)
 
-ProjectCard.propTypes = {
+FullpageWrapper.propTypes = {
   mainColor: PropTypes.element.isRequired,
   currentProject: PropTypes.element.isRequired,
   dispatch: PropTypes.element.isRequired,

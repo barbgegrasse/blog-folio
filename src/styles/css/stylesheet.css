@@ -532,38 +532,6 @@ body {
   .main-title .item {
     display: block; }
 
-.fonction {
-  font-size: 60px;
-  text-transform: uppercase;
-  letter-spacing: -3px;
-  mix-blend-mode: difference;
-  color: white;
-  transform: translateX(-100%); }
-  .fonction.smaller {
-    font-size: 22px;
-    letter-spacing: -1px; }
-
-.block-span {
-  /*
-  z-index: 800;
-  position: absolute;
-  top: 395px;
-  left: 11%;
-  .item {
-    display: block;
-    width: 88px;
-    height: 4px;
-    border-radius: 5px;
-    background-color: #ce265d;
-    &:first-child {
-      margin-bottom: 15px;
-    }
-    &:last-child {
-      margin-left: 54px;
-    }
-  }
-  */ }
-
 .title-project {
   font-family: 'IBM Plex Mono', monospace;
   color: #ce265d;
