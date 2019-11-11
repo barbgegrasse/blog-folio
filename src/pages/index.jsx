@@ -48,10 +48,11 @@ const BlockSpan = styled('div')`
     }
   }
 `
-
+/*
 const pluginWrapper = () => {
   require('../plugins/fullpage.resetSliders.min.js')
 }
+*/
 
 const anchors = ['presentation', 'portfolio', 'contact']
 const animateAnchor = false
@@ -689,9 +690,9 @@ class FullpageWrapper extends React.Component {
     return (
       <LayoutIndex>
         <ReactFullpage
-          pluginWrapper={pluginWrapper}
+          // pluginWrapper={pluginWrapper}
           licenseKey="35C013F1-0AFB49AE-99AB6601-C44F38BA"
-          resetSlidersKey="31A7077D-8E0542AF-985B8993-67974543"
+          // resetSlidersKey="31A7077D-8E0542AF-985B8993-67974543"
           resetSliders
           anchors={anchors}
           menu="#mainmenu"

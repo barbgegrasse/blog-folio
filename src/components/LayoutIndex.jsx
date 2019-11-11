@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-import { Link } from 'gatsby'
+// import { Link } from 'gatsby'
+import AniLink from 'gatsby-plugin-transition-link/AniLink'
 import colors from '../styles/colors'
 import chevronSvg from '../images/logo4.svg'
 
@@ -99,7 +100,9 @@ const LayoutIndex = ({ children, mainColor }) => {
           <a title="Contact" href="#contact" data-menuanchor="contact">
             Contact
           </a>
-          <Link to="/blog">Blog</Link>
+          <AniLink swipe direction="up" to="blog">
+            Blog
+          </AniLink>
         </MainNav>
       </header>
       <main>{children}</main>
