@@ -100,7 +100,15 @@ const SectionContact = () => {
     <div className="section section3 contact" data-anchor="contact">
       <ContactWrapper>
         <Title>Contact</Title>
-        <form id="formContact" className="contact-form row">
+        <form
+          id="formContact"
+          className="contact-form row"
+          name="contact"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="bot-field" />
+          <input type="hidden" name="form-contact" value="contact" />
           <FormField>
             <InputTxt
               id="name"
