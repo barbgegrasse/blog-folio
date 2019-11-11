@@ -101,12 +101,13 @@ const SectionContact = () => {
       <ContactWrapper>
         <form
           id="formContact"
-          name="contact"
+          name="Contact Form"
+          method="POST"
           data-netlify="true"
-          data-netlify-honeypot="bot-field"
+          action="/merci"
         >
           <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-contact" value="contact" />
+          <input type="hidden" name="form-name" value="Contact Form" />
           <FormField>
             <InputTxt
               id="name"
@@ -119,21 +120,18 @@ const SectionContact = () => {
               Nom
             </Label>
           </FormField>
-
           <FormField>
             <InputTxt onKeyUp={HandleKey} id="email" type="email" required />
             <Label className="label" htmlFor="email">
               E-mail
             </Label>
           </FormField>
-
           <FormField>
             <InputTxt onKeyUp={HandleKey} id="message" type="text" required />
             <Label className="label" htmlFor="message">
               Votre message
             </Label>
           </FormField>
-
           <FormField>
             <SubmitButton
               className="submit-btn"
@@ -142,7 +140,6 @@ const SectionContact = () => {
             />
           </FormField>
         </form>
-        */}
       </ContactWrapper>
     </div>
   )
