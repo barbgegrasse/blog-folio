@@ -1,5 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import ReactFullpage from '@fullpage/react-fullpage'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -214,6 +215,7 @@ class FullpageWrapper extends React.Component {
       .to('#wrapLogo', 1, { left: '50%', ease: Power1.easeInOut }, 'ouverture')
       .addLabel('firstSlideOver')
   }
+
   /*
   _onMouseMove(e) {
     //Je récupère ma lune
@@ -765,6 +767,7 @@ class FullpageWrapper extends React.Component {
     let animationIsFinished = false
     return (
       <LayoutIndex>
+        <Helmet title="Johan Petrikovsky - Developpeur web à Toulouse" />
         <ReactFullpage
           // pluginWrapper={pluginWrapper}
           licenseKey="35C013F1-0AFB49AE-99AB6601-C44F38BA"
