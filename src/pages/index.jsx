@@ -766,86 +766,220 @@ class FullpageWrapper extends React.Component {
     let timeoutId
     let animationIsFinished = false
     return (
-      <LayoutIndex>
+      <>
         <Helmet title="Johan Petrikovsky - Developpeur web à Toulouse" />
-        <ReactFullpage
-          // pluginWrapper={pluginWrapper}
-          licenseKey="35C013F1-0AFB49AE-99AB6601-C44F38BA"
-          // resetSlidersKey="31A7077D-8E0542AF-985B8993-67974543"
-          resetSliders
-          anchors={anchors}
-          menu="#mainmenu"
-          lockAnchors={false}
-          animateAnchor={animateAnchor}
-          scrollingSpeed={500}
-          navigation
-          navigationPosition="left"
-          slidesNavigation={false}
-          slidesNavPosition="bottom"
-          onLeave={(origin, destination, direction) => {
-            // On quitte le premier slide
-            if (origin.index === 0) {
-              const globalColor = this.state.projectList[
-                this.state.currentProject
-              ].color
-              // On enleve la classe active du premier élément présentation
-              const currentItem = document.querySelector(
-                '#mainmenu a:nth-child(1)'
-              )
-              currentItem.classList.remove('active')
+        <LayoutIndex>
+          <ReactFullpage
+            // pluginWrapper={pluginWrapper}
+            licenseKey="35C013F1-0AFB49AE-99AB6601-C44F38BA"
+            // resetSlidersKey="31A7077D-8E0542AF-985B8993-67974543"
+            resetSliders
+            anchors={anchors}
+            menu="#mainmenu"
+            lockAnchors={false}
+            animateAnchor={animateAnchor}
+            scrollingSpeed={500}
+            navigation
+            navigationPosition="left"
+            slidesNavigation={false}
+            slidesNavPosition="bottom"
+            onLeave={(origin, destination, direction) => {
+              // On quitte le premier slide
+              if (origin.index === 0) {
+                const globalColor = this.state.projectList[
+                  this.state.currentProject
+                ].color
+                // On enleve la classe active du premier élément présentation
+                const currentItem = document.querySelector(
+                  '#mainmenu a:nth-child(1)'
+                )
+                currentItem.classList.remove('active')
 
-              // On met en surbrillance le second élément de menu
-              const activeItem = document.querySelector(
-                '#mainmenu a:nth-child(2)'
-              )
-              this.dispatch(setColor(globalColor))
-              activeItem.style.color = globalColor
+                // On met en surbrillance le second élément de menu
+                const activeItem = document.querySelector(
+                  '#mainmenu a:nth-child(2)'
+                )
+                this.dispatch(setColor(globalColor))
+                activeItem.style.color = globalColor
 
-              // ${this.state.projectList[this.state.currentProject].color}
-              new TimelineLite()
-                .addLabel('leaveOne')
-                // On fait bouger le logo
-                .to('#wrapMoon', 0.5, {
-                  left: '100%',
-                  opacity: 0,
-                  ease: Power4.easeInOut,
+                // ${this.state.projectList[this.state.currentProject].color}
+                new TimelineLite()
+                  .addLabel('leaveOne')
+                  // On fait bouger le logo
+                  .to('#wrapMoon', 0.5, {
+                    left: '100%',
+                    opacity: 0,
+                    ease: Power4.easeInOut,
+                  })
+
+                  .to(
+                    '#wrapLogo',
+                    0.4,
+                    { left: '100%', opacity: 0, ease: Power4.easeInOut },
+                    'leaveOne'
+                  )
+
+                  .to(
+                    '#mainTitle',
+                    1,
+                    { xPercent: -100, ease: Power1.easeInOut },
+                    'leaveOne'
+                  )
+
+                  .to(
+                    '#blockSpan',
+                    0.5,
+                    { xPercent: -100, ease: Power2.easeInOut },
+                    'leaveOne'
+                  )
+
+                  .to(
+                    '#fonction',
+                    0.5,
+                    { xPercent: -100, ease: Power2.easeInOut },
+                    'leaveOne'
+                  )
+                  .to(
+                    '#fonctionSmaller',
+                    0.5,
+                    { xPercent: -100, ease: Power2.easeInOut },
+                    'leaveOne'
+                  )
+
+                  .to(
+                    '#fullpage',
+                    1,
+                    {
+                      backgroundImage: `-webkit-linear-gradient(180deg, ${this.state.projectList[this.state.currentProject].color} 34%, #ffffff 34%)`,
+                      ease: Power4.easeInOut,
+                    },
+                    'leaveOne'
+                  )
+                  .to(
+                    '#miniLogo',
+                    0.3,
+                    {
+                      left: '11%',
+                      opacity: 1,
+                      ease: Power4.easeInOut,
+                    },
+                    'leaveOne+=1.5'
+                  )
+
+                if (this.state.animProject) {
+                  new TimelineLite()
+
+                    .to('.bloc-presentation', 0, {
+                      xPercent: 100,
+                      left: '11%',
+                      ease: Power4.easeInOut,
+                    })
+                    .to(
+                      '.background-image.current',
+                      1.5,
+                      {
+                        marginLeft: 0,
+                        ease: Power4.easeInOut,
+                      },
+                      '+=1.4'
+                    )
+
+                    .to(
+                      `.${this.state.projectList[0].slug} .title-project`,
+                      0.8,
+                      { xPercent: 100, ease: Power4.easeInOut },
+                      '-=1.3'
+                    )
+                    .to(
+                      `.${this.state.projectList[0].slug} .block-span`,
+                      0.5,
+                      { xPercent: 100, ease: Power4.easeInOut },
+                      '-=0.7'
+                    )
+                    .to(
+                      `.${this.state.projectList[0].slug} .desc-project`,
+                      0.8,
+                      { xPercent: 100, ease: Power4.easeInOut },
+                      '-=0.7'
+                    )
+                    .to(
+                      `.${this.state.projectList[0].slug} .technos`,
+                      0.8,
+                      { xPercent: 100, ease: Power4.easeInOut },
+                      '-=0.7'
+                    )
+                    .to(
+                      '.illu-project-wrapper',
+                      1,
+                      { opacity: 1, ease: Power1.easeInOut },
+                      '-=0.7'
+                    )
+                    .to(
+                      `.${this.state.projectList[0].slug} .link-project`,
+                      0.8,
+                      { xPercent: 100, ease: Power4.easeInOut },
+                      '-=0.7'
+                    )
+                    .to('#moveProject', 0.8, {
+                      scale: 1,
+                      ease: Bounce.easeOut,
+                    })
+
+                  this.moveButtons()
+                  this.setState({ animProject: false })
+                }
+
+                // animating my element
+                clearTimeout(timeoutId)
+
+                timeoutId = setTimeout(() => {
+                  animationIsFinished = true
+
+                  if (direction === 'down') {
+                    // this.fullPageApi.moveTo(destination.index + 1)
+                    this.fullPageApi.moveTo('portfolio', 1)
+                  } else {
+                    // this.fullPageApi.moveSectionUp()
+                  }
+                }, delay)
+
+                return animationIsFinished
+              }
+
+              // Si je quitte mon slide contact pour remonter sur folio
+              if (destination.index === 1 && origin.index === 2) {
+                // On met à jour le state color global
+                const globalColor = this.state.projectList[
+                  this.state.currentProject
+                ].color
+                this.props.dispatch(setColor(globalColor))
+
+                // On enleve la classe troisieme élément contact
+                const currentItem = document.querySelector(
+                  '#mainmenu a:nth-child(3)'
+                )
+                currentItem.classList.remove('active')
+                console.log('item 3', currentItem)
+
+                // On met en surbrillance le troisieme élément de menu
+                const activeItem = document.querySelector(
+                  '#mainmenu a:nth-child(2)'
+                )
+                activeItem.classList.add('active')
+
+                // Contact couleur
+                const contactItem = document.querySelector(
+                  '#mainmenu a:nth-child(3)'
+                )
+                contactItem.style.color = colors.blue900
+
+                // Animation du background
+                const bgAnim = new TimelineMax({
+                  paused: true,
+                  delay: 1,
                 })
 
-                .to(
-                  '#wrapLogo',
-                  0.4,
-                  { left: '100%', opacity: 0, ease: Power4.easeInOut },
-                  'leaveOne'
-                )
-
-                .to(
-                  '#mainTitle',
-                  1,
-                  { xPercent: -100, ease: Power1.easeInOut },
-                  'leaveOne'
-                )
-
-                .to(
-                  '#blockSpan',
-                  0.5,
-                  { xPercent: -100, ease: Power2.easeInOut },
-                  'leaveOne'
-                )
-
-                .to(
-                  '#fonction',
-                  0.5,
-                  { xPercent: -100, ease: Power2.easeInOut },
-                  'leaveOne'
-                )
-                .to(
-                  '#fonctionSmaller',
-                  0.5,
-                  { xPercent: -100, ease: Power2.easeInOut },
-                  'leaveOne'
-                )
-
-                .to(
+                bgAnim.to(
                   '#fullpage',
                   1,
                   {
@@ -854,258 +988,124 @@ class FullpageWrapper extends React.Component {
                   },
                   'leaveOne'
                 )
-                .to(
-                  '#miniLogo',
-                  0.3,
-                  {
-                    left: '11%',
-                    opacity: 1,
-                    ease: Power4.easeInOut,
-                  },
-                  'leaveOne+=1.5'
-                )
-
-              if (this.state.animProject) {
-                new TimelineLite()
-
-                  .to('.bloc-presentation', 0, {
-                    xPercent: 100,
-                    left: '11%',
-                    ease: Power4.easeInOut,
-                  })
-                  .to(
-                    '.background-image.current',
-                    1.5,
-                    {
-                      marginLeft: 0,
-                      ease: Power4.easeInOut,
-                    },
-                    '+=1.4'
-                  )
-
-                  .to(
-                    `.${this.state.projectList[0].slug} .title-project`,
-                    0.8,
-                    { xPercent: 100, ease: Power4.easeInOut },
-                    '-=1.3'
-                  )
-                  .to(
-                    `.${this.state.projectList[0].slug} .block-span`,
-                    0.5,
-                    { xPercent: 100, ease: Power4.easeInOut },
-                    '-=0.7'
-                  )
-                  .to(
-                    `.${this.state.projectList[0].slug} .desc-project`,
-                    0.8,
-                    { xPercent: 100, ease: Power4.easeInOut },
-                    '-=0.7'
-                  )
-                  .to(
-                    `.${this.state.projectList[0].slug} .technos`,
-                    0.8,
-                    { xPercent: 100, ease: Power4.easeInOut },
-                    '-=0.7'
-                  )
-                  .to(
-                    '.illu-project-wrapper',
-                    1,
-                    { opacity: 1, ease: Power1.easeInOut },
-                    '-=0.7'
-                  )
-                  .to(
-                    `.${this.state.projectList[0].slug} .link-project`,
-                    0.8,
-                    { xPercent: 100, ease: Power4.easeInOut },
-                    '-=0.7'
-                  )
-                  .to('#moveProject', 0.8, {
-                    scale: 1,
-                    ease: Bounce.easeOut,
-                  })
-
-                this.moveButtons()
-                this.setState({ animProject: false })
+                bgAnim.play()
               }
 
-              // animating my element
-              clearTimeout(timeoutId)
+              // Si je retourne sur le premier slide
+              if (destination.index === 0) {
+                const globalColor = colors.pink900
+                this.dispatch(setColor(globalColor))
 
-              timeoutId = setTimeout(() => {
-                animationIsFinished = true
+                // On ajoute la classe active sur le premier élément de présentation
+                const currentItem = document.querySelector(
+                  '#mainmenu a:nth-child(1)'
+                )
+                currentItem.classList.add('active')
 
-                if (direction === 'down') {
-                  // this.fullPageApi.moveTo(destination.index + 1)
-                  this.fullPageApi.moveTo('portfolio', 1)
-                } else {
-                  // this.fullPageApi.moveSectionUp()
-                }
-              }, delay)
+                // On réinitialise la couleur
+                const activeItem = document.querySelector(
+                  '#mainmenu a:nth-child(2)'
+                )
+                activeItem.style.color = colors.blue900
+                // Contact couleur
+                const contactItem = document.querySelector(
+                  '#mainmenu a:nth-child(3)'
+                )
+                contactItem.style.color = colors.blue900
+                console.log('retour premier slide')
+                new TimelineLite()
+                  .to('#miniLogo', 0.5, {
+                    left: 0,
+                    opacity: 0,
+                    ease: Power4.easeInOut,
+                  })
+                  .to('#wrapMoon', 0.3, {
+                    left: '50%',
+                    opacity: 1,
+                    ease: Power1.easeInOut,
+                  })
+                  .to(
+                    '#wrapLogo',
+                    0.5,
+                    { left: '50%', opacity: 1, ease: Power1.easeInOut },
+                    '-=0.5'
+                  )
+                  .to(
+                    '#mainTitle',
+                    1,
+                    { xPercent: 0, ease: Power1.easeInOut },
+                    'leaveOne'
+                  )
 
-              return animationIsFinished
-            }
+                  .to(
+                    '#blockSpan',
+                    0.5,
+                    { xPercent: 100, ease: Power2.easeInOut },
+                    'leaveOne'
+                  )
 
-            // Si je quitte mon slide contact pour remonter sur folio
-            if (destination.index === 1 && origin.index === 2) {
-              // On met à jour le state color global
-              const globalColor = this.state.projectList[
-                this.state.currentProject
-              ].color
-              this.props.dispatch(setColor(globalColor))
+                  .to(
+                    '#fonction',
+                    0.5,
+                    { xPercent: 100, ease: Power1.easeInOut },
+                    'leaveOne'
+                  )
 
-              // On enleve la classe troisieme élément contact
-              const currentItem = document.querySelector(
-                '#mainmenu a:nth-child(3)'
-              )
-              currentItem.classList.remove('active')
-              console.log('item 3', currentItem)
+                  // Retour background diagonale
+                  .to(
+                    '#fullpage',
+                    1,
+                    {
+                      backgroundImage:
+                        'webkit-linear-gradient(112deg, rgb(15, 3, 80) 73%, rgb(255, 255, 255) 50%)',
+                      ease: Power1.easeInOut,
+                    },
+                    'leaveOne'
+                  )
+              }
 
-              // On met en surbrillance le troisieme élément de menu
-              const activeItem = document.querySelector(
-                '#mainmenu a:nth-child(2)'
-              )
-              activeItem.classList.add('active')
+              // Si j'arrive sur mon slide contact
+              if (destination.index === 2) {
+                this.props.dispatch(setColor(colors.pink900))
 
-              // Contact couleur
-              const contactItem = document.querySelector(
-                '#mainmenu a:nth-child(3)'
-              )
-              contactItem.style.color = colors.blue900
+                // On enleve la classe active du second élément présentation
+                const currentItem = document.querySelector(
+                  '#mainmenu a:nth-child(2)'
+                )
+                currentItem.classList.remove('active')
+                currentItem.style.color = colors.blue900
 
-              // Animation du background
-              const bgAnim = new TimelineMax({
-                paused: true,
-                delay: 1,
-              })
+                // On met en surbrillance le troisieme élément de menu
+                const activeItem = document.querySelector(
+                  '#mainmenu a:nth-child(3)'
+                )
+                activeItem.classList.add('active')
+                activeItem.style.color = colors.pink900
 
-              bgAnim.to(
-                '#fullpage',
-                1,
-                {
-                  backgroundImage: `-webkit-linear-gradient(180deg, ${this.state.projectList[this.state.currentProject].color} 34%, #ffffff 34%)`,
-                  ease: Power4.easeInOut,
-                },
-                'leaveOne'
-              )
-              bgAnim.play()
-            }
-
-            // Si je retourne sur le premier slide
-            if (destination.index === 0) {
-              const globalColor = colors.pink900
-              this.dispatch(setColor(globalColor))
-
-              // On ajoute la classe active sur le premier élément de présentation
-              const currentItem = document.querySelector(
-                '#mainmenu a:nth-child(1)'
-              )
-              currentItem.classList.add('active')
-
-              // On réinitialise la couleur
-              const activeItem = document.querySelector(
-                '#mainmenu a:nth-child(2)'
-              )
-              activeItem.style.color = colors.blue900
-              // Contact couleur
-              const contactItem = document.querySelector(
-                '#mainmenu a:nth-child(3)'
-              )
-              contactItem.style.color = colors.blue900
-              console.log('retour premier slide')
-              new TimelineLite()
-                .to('#miniLogo', 0.5, {
-                  left: 0,
-                  opacity: 0,
-                  ease: Power4.easeInOut,
+                const bgAnim = new TimelineMax({
+                  paused: true,
+                  delay: 1,
                 })
-                .to('#wrapMoon', 0.3, {
-                  left: '50%',
-                  opacity: 1,
-                  ease: Power1.easeInOut,
-                })
-                .to(
-                  '#wrapLogo',
-                  0.5,
-                  { left: '50%', opacity: 1, ease: Power1.easeInOut },
-                  '-=0.5'
-                )
-                .to(
-                  '#mainTitle',
-                  1,
-                  { xPercent: 0, ease: Power1.easeInOut },
-                  'leaveOne'
-                )
 
-                .to(
-                  '#blockSpan',
-                  0.5,
-                  { xPercent: 100, ease: Power2.easeInOut },
-                  'leaveOne'
-                )
-
-                .to(
-                  '#fonction',
-                  0.5,
-                  { xPercent: 100, ease: Power1.easeInOut },
-                  'leaveOne'
-                )
-
-                // Retour background diagonale
-                .to(
+                bgAnim.to(
                   '#fullpage',
                   1,
                   {
                     backgroundImage:
-                      'webkit-linear-gradient(112deg, rgb(15, 3, 80) 73%, rgb(255, 255, 255) 50%)',
-                    ease: Power1.easeInOut,
+                      '-webkit-linear-gradient(146deg, rgb(206, 38, 93) 34%, #ffffff 34%)',
+                    ease: Power4.easeInOut,
                   },
                   'leaveOne'
                 )
-            }
+                bgAnim.play()
+              }
 
-            // Si j'arrive sur mon slide contact
-            if (destination.index === 2) {
-              this.props.dispatch(setColor(colors.pink900))
-
-              // On enleve la classe active du second élément présentation
-              const currentItem = document.querySelector(
-                '#mainmenu a:nth-child(2)'
-              )
-              currentItem.classList.remove('active')
-              currentItem.style.color = colors.blue900
-
-              // On met en surbrillance le troisieme élément de menu
-              const activeItem = document.querySelector(
-                '#mainmenu a:nth-child(3)'
-              )
-              activeItem.classList.add('active')
-              activeItem.style.color = colors.pink900
-
-              const bgAnim = new TimelineMax({
-                paused: true,
-                delay: 1,
-              })
-
-              bgAnim.to(
-                '#fullpage',
-                1,
-                {
-                  backgroundImage:
-                    '-webkit-linear-gradient(146deg, rgb(206, 38, 93) 34%, #ffffff 34%)',
-                  ease: Power4.easeInOut,
-                },
-                'leaveOne'
-              )
-              bgAnim.play()
-            }
-
-            return true
-          }}
-          render={({ fullpageApi }) => {
-            this.fullPageApi = fullpageApi
-            return (
-              <>
-                <div>
+              return true
+            }}
+            render={({ fullpageApi }) => {
+              this.fullPageApi = fullpageApi
+              return (
+                <>
                   <SectionPresentation />
                   <SectionProjects>
                     <>
@@ -1156,12 +1156,12 @@ class FullpageWrapper extends React.Component {
                     </>
                   </SectionProjects>
                   <SectionContact />
-                </div>
-              </>
-            )
-          }}
-        />
-      </LayoutIndex>
+                </>
+              )
+            }}
+          />
+        </LayoutIndex>
+      </>
     )
   }
 }
