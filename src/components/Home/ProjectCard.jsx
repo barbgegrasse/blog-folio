@@ -52,7 +52,7 @@ const BackgroundImage = styled('div')`
 `
 
 const TitleProject = styled('h2')`
-  margin-bottom: 100px;
+  margin-bottom: 120px;
   font-family: 'IBM Plex Mono', monospace;
   color: #ce265d;
   font-size: 80px;
@@ -133,7 +133,18 @@ class ProjectCard extends Component {
 
   render() {
     const {
-      project: { slug, name, color, siteweb, current, image, id, mainColor },
+      project: {
+        slug,
+        name,
+        desc,
+        technos,
+        color,
+        siteweb,
+        current,
+        image,
+        id,
+        mainColor,
+      },
     } = this.props
     return (
       <>
@@ -144,12 +155,9 @@ class ProjectCard extends Component {
             {name}
           </TitleProject>
 
-          <DescProject className="desc-project">
-            Développement et intégration de la partie front-end
-            {slug}
-          </DescProject>
+          <DescProject className="desc-project">{desc}</DescProject>
 
-          <Technos className="technos">HTML/JS/CSS/SASS/PHP</Technos>
+          <Technos className="technos">{technos}</Technos>
 
           <LinkProject
             className="link-project"

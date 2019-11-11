@@ -1,15 +1,25 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import PropTypes from 'prop-types'
+import colors from '../../styles/colors'
+
+const BlockPresentation = styled('div')`
+  position: absolute;
+  color: #fff;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 11%;
+`
 
 const Fonction = styled('h2')`
   font-size: 60px;
   text-transform: uppercase;
   letter-spacing: -3px;
   mix-blend-mode: difference;
-  color: white;
+  color: ${colors.blue900};
   transform: translateX(-100%);
-  margin-top: 100px;
+  margin-top: 30px;
 
   &.smaller {
     font-size: 22px;
@@ -20,11 +30,10 @@ const Fonction = styled('h2')`
 const SectionPresentation = () => {
   return (
     <div className="section section1" data-anchor="presentation">
-      <div id="blockPresentation" className="block-presentation">
+      <BlockPresentation>
         <h1 id="mainTitle" className="main-title">
           <span className="item">Johan</span>
-          <span className="item">Petri</span>
-          <span className="item">Kovsky</span>
+          <span className="item">Petrikovsky</span>
         </h1>
 
         <div className="relative wrap-fonction">
@@ -33,8 +42,13 @@ const SectionPresentation = () => {
             <br />
             web developer
           </Fonction>
+          <Fonction id="fonctionSmaller" className="smaller">
+            Freelance depuis 2012.
+            <br />
+            +50 projets menés à bien.
+          </Fonction>
         </div>
-      </div>
+      </BlockPresentation>
 
       <div id="blockMoon" className="block-moon">
         <div className="half" />

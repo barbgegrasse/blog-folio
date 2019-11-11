@@ -33,6 +33,7 @@ const colors = {
   orange100: '#FEF0EC',
 
   yellow500: '#EFBB35', // Titre BLOG
+  yellow100: '#E4FC93', // Logo Home
 
   pink900: '#ff155e',
   pink800: '#B366B3',

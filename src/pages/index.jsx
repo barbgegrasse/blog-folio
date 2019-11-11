@@ -72,7 +72,6 @@ class FullpageWrapper extends React.Component {
 
     this.currentProject = 0
     this.nextProject = this.currentProject + 1
-    this.totalProjects = 3
 
     this.dispatch = this.props.dispatch
 
@@ -81,7 +80,9 @@ class FullpageWrapper extends React.Component {
       projectList: [
         {
           id: 1,
-          name: 'Soccerpark',
+          name: 'Le Five',
+          desc: 'Développement et intégration de la partie front-end',
+          technos: 'HTML/CSS/SASS/jQuery/PHP',
           color: '#d41e38',
           slug: 'soccer',
           siteweb: 'http://lefive.fr',
@@ -91,18 +92,57 @@ class FullpageWrapper extends React.Component {
         {
           id: 2,
           name: 'Redd',
+          desc: 'Développement et intégration de la partie front-end',
+          technos: 'HTML/CSS/SASS/jQuery/PHP',
           slug: 'redd',
           color: '#6da1ff',
-          siteweb: 'http://lefive.fr',
+          siteweb: 'https://www.redd-realestate.com/',
           current: '',
-          image: this.props.data.thalasso.childImageSharp.fluid.src,
+          image: this.props.data.redd.childImageSharp.fluid.src,
         },
         {
           id: 3,
-          name: 'Perrin Ravioli',
+          name: 'Perrin',
+          desc: 'Mise à jour et refonte graphique',
+          technos: 'Prestashop',
           slug: 'perrin',
           color: '#afac05',
-          siteweb: 'http://lefive.fr',
+          siteweb: 'http://www.perrin-ravioli.com/fr/',
+          current: '',
+          image: this.props.data.perrin.childImageSharp.fluid.src,
+        },
+        {
+          id: 4,
+          name: 'Team BNG',
+          desc: 'Développement et intégration de la partie front-end',
+          technos: 'HTML/CSS/SASS/jQuery/PHP',
+          slug: 'bng',
+          color: '#f6e900',
+          siteweb: 'https://www.team-bng.com/',
+          current: '',
+          image: this.props.data.bng.childImageSharp.fluid.src,
+        },
+        {
+          id: 5,
+          name: 'Brito',
+          desc:
+            "Réalisation sous Wordpress d'un site e-commmerce avec système de click & collect ",
+          technos: 'Wordpress / Woocommerce',
+          slug: 'brito',
+          color: '#c42879',
+          siteweb: 'http://www.philippebrito.com/',
+          current: '',
+          image: this.props.data.brito.childImageSharp.fluid.src,
+        },
+        {
+          id: 6,
+          name: 'Thalasso',
+          desc:
+            'Développement et intégration de la partie front-end du site Thalasso Blanco du groupe Serge Blanco',
+          technos: 'Wordpress / Woocommerce',
+          slug: 'thalasso',
+          color: '#70a9c5',
+          siteweb: 'https://www.thalassoblanco.com/',
           current: '',
           image: this.props.data.thalasso.childImageSharp.fluid.src,
         },
@@ -141,7 +181,7 @@ class FullpageWrapper extends React.Component {
       .addLabel('ouverture')
       .to(
         '#mainTitle',
-        1,
+        0.5,
         { marginLeft: 0, ease: Power1.easeInOut },
         'ouverture'
       )
@@ -149,13 +189,19 @@ class FullpageWrapper extends React.Component {
         '#blockSpan',
         0.5,
         { xPercent: 100, ease: Power2.easeInOut },
-        'ouverture'
+        'ouverture+=0.1'
       )
       .to(
         '#fonction',
         0.5,
         { xPercent: 100, ease: Power2.easeInOut },
-        'ouverture'
+        'ouverture+=0.1'
+      )
+      .to(
+        '#fonctionSmaller',
+        0.5,
+        { xPercent: 100, ease: Power2.easeInOut },
+        'ouverture+=0.1'
       )
 
       // Animation de la boule et du logo
@@ -168,7 +214,37 @@ class FullpageWrapper extends React.Component {
       .to('#wrapLogo', 1, { left: '50%', ease: Power1.easeInOut }, 'ouverture')
       .addLabel('firstSlideOver')
   }
+  /*
+  _onMouseMove(e) {
+    //Je récupère ma lune
+    const moon = document.querySelector("#moon").getBoundingClientRect();
 
+    const moonLeft = moon.left //Je  récupềre son positionnement par rapport au bord gauche
+    const moonCenterX = moon.width / 2 // Je vais additioner la largeur de lune / 2 pour avoir le centre
+    const decalPosX = moonLeft + moonCenterX // décalage pour obtenir le centre de mon effet parralax
+
+    //Même chose pour le Y
+    const moonTop = moon.top //Je  récupềre son positionnement par rapport au bord gauche
+    const moonCenterY = moon.height / 2 // Je vais additioner la largeur de lune / 2 pour avoir le centre
+    const decalPosY = moonTop + moonCenterY // décalage pour obtenir le centre de mon effet parralax
+    
+    // déplacement du background  lune
+    const moveXbgmoon =  ((e.screenX - decalPosX) / 100 ) //Je divise par 100 pour atténuer le mouvement
+    const moveYbgmoon =  ((e.screenY - decalPosY) / 100 )
+
+    //déplacement de la lune
+    const moveXmoon =  ((e.screenX - decalPosX) / 40)
+    const moveYmoon =  ((e.screenY - decalPosY) / 40)
+
+    //déplacement mainLogo
+    const moveXmainLogo =  ((e.screenX - decalPosX) / 30)
+    const moveYmainLogo =  ((e.screenY - decalPosY) / 30)
+
+    document.querySelector('#bgMoon').style.transform = `translate3d( ${moveXbgmoon}px, ${moveYbgmoon}px, 0 )`;
+    document.querySelector('#moon').style.transform = `translate3d( ${moveXmoon}px, ${moveYmoon}px, 0 )`;        
+    document.querySelector('#mainLogo').style.transform = `translate3d( ${moveXmainLogo}px, ${moveYmainLogo}px, 0 )`;        
+}
+*/
   handleHover(event) {
     const el = event.target
     el.style.backgroundColor = this.props.mainColor
@@ -420,7 +496,7 @@ class FullpageWrapper extends React.Component {
     const currentProject = this.state.currentProject
     const nextProject = currentProject + 1
 
-    if (nextProject === this.totalProjects) {
+    if (nextProject === this.state.projectList.length) {
       // Si pas de projet suivant j'annime le second bouton "suivant"
       const noProject = new TimelineMax({
         paused: true,
@@ -759,6 +835,12 @@ class FullpageWrapper extends React.Component {
                   { xPercent: -100, ease: Power2.easeInOut },
                   'leaveOne'
                 )
+                .to(
+                  '#fonctionSmaller',
+                  0.5,
+                  { xPercent: -100, ease: Power2.easeInOut },
+                  'leaveOne'
+                )
 
                 .to(
                   '#fullpage',
@@ -771,13 +853,13 @@ class FullpageWrapper extends React.Component {
                 )
                 .to(
                   '#miniLogo',
-                  0.5,
+                  0.3,
                   {
                     left: '11%',
                     opacity: 1,
                     ease: Power4.easeInOut,
                   },
-                  'leaveOne+=2'
+                  'leaveOne+=1.5'
                 )
 
               if (this.state.animProject) {
@@ -879,8 +961,13 @@ class FullpageWrapper extends React.Component {
               const activeItem = document.querySelector(
                 '#mainmenu a:nth-child(2)'
               )
-
               activeItem.classList.add('active')
+
+              // Contact couleur
+              const contactItem = document.querySelector(
+                '#mainmenu a:nth-child(3)'
+              )
+              contactItem.style.color = colors.blue900
 
               // Animation du background
               const bgAnim = new TimelineMax({
@@ -916,8 +1003,18 @@ class FullpageWrapper extends React.Component {
                 '#mainmenu a:nth-child(2)'
               )
               activeItem.style.color = colors.blue900
-
+              // Contact couleur
+              const contactItem = document.querySelector(
+                '#mainmenu a:nth-child(3)'
+              )
+              contactItem.style.color = colors.blue900
+              console.log('retour premier slide')
               new TimelineLite()
+                .to('#miniLogo', 0.5, {
+                  left: 0,
+                  opacity: 0,
+                  ease: Power4.easeInOut,
+                })
                 .to('#wrapMoon', 0.3, {
                   left: '50%',
                   opacity: 1,
@@ -979,6 +1076,7 @@ class FullpageWrapper extends React.Component {
                 '#mainmenu a:nth-child(3)'
               )
               activeItem.classList.add('active')
+              activeItem.style.color = colors.pink900
 
               const bgAnim = new TimelineMax({
                 paused: true,
@@ -1051,7 +1149,7 @@ class FullpageWrapper extends React.Component {
                         )
                       })}
 
-                      <ProjectCounter />
+                      <ProjectCounter projects={this.state.projectList} />
                     </>
                   </SectionProjects>
                   <SectionContact />
@@ -1081,7 +1179,28 @@ export const query = graphql`
         }
       }
     }
+    bng: file(relativePath: { eq: "bng.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1020) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
     brito: file(relativePath: { eq: "brito.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1020) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    redd: file(relativePath: { eq: "redd.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1020) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    perrin: file(relativePath: { eq: "perrin.jpg" }) {
       childImageSharp {
         fluid(quality: 90, maxWidth: 1020) {
           ...GatsbyImageSharpFluid_withWebp

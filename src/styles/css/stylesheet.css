@@ -476,7 +476,8 @@ body {
       position: absolute;
       top: 50%;
       left: 120%;
-      transform: translate(-50%, -50%); }
+      transform: translate(-50%, -50%);
+      mix-blend-mode: exclusion; }
     .block-moon .wrap .wrap-moon {
       z-index: 200;
       position: absolute;
@@ -484,7 +485,7 @@ body {
       left: 120%;
       transform: translate(-50%, -50%); }
     .block-moon .wrap .moon {
-      background-color: #ff155e;
+      background-color: #f3ffb3;
       clip-path: circle(50%);
       width: 545px;
       height: 545px; }
@@ -512,23 +513,13 @@ body {
   color: #ea8748; }
 
 /* SECTION 1 */
-.block-presentation {
-  position: absolute;
-  color: #fff;
-  position: absolute;
-  overflow: hidden;
-  top: 50%;
-  margin-top: -255px;
-  margin-left: 11%; }
-
 .main-title {
   margin-left: -800px;
   font-family: 'IBM Plex Mono', monospace;
   color: #0f0350;
-  font-size: 120px;
+  font-size: 90px;
   font-weight: 200;
-  line-height: 1;
-  font-style: italic; }
+  line-height: 1; }
   .main-title .item {
     display: block; }
 

@@ -29,7 +29,8 @@ const MainNav = styled('nav')`
 
     transition: all 0.5s ease-out;
     &.active {
-      color: ${colors.pink900};
+      color: ${colors.yellow100};
+      text-shadow: 1px 1px 1px ${colors.blue900};
     }
   }
 `

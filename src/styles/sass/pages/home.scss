@@ -33,6 +33,8 @@ body {
       top: 50%;
       left: 120%;
       transform: translate(-50%, -50%);
+
+      mix-blend-mode: exclusion;
     }
 
     .wrap-moon {
@@ -45,7 +47,7 @@ body {
     }
 
     .moon {
-      background-color: #ff155e;
+      background-color: #f3ffb3;
       clip-path: circle(50%);
       width: 545px;
       height: 545px;
@@ -83,25 +85,14 @@ body {
 }
 
 /* SECTION 1 */
-.block-presentation {
-  position: absolute;
-  color: #fff;
-  position: absolute;
-  overflow: hidden;
-  top: 50%;
-  margin-top: -255px;
-  margin-left: 11%;
-}
 
 .main-title {
   margin-left: -800px;
   font-family: 'IBM Plex Mono', monospace;
-  //color : #f7863e;
   color: #0f0350;
-  font-size: 120px;
+  font-size: 90px;
   font-weight: 200;
   line-height: 1;
-  font-style: italic;
   .item {
     display: block;
   }

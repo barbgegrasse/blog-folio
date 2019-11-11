@@ -25,7 +25,8 @@ const Count = styled('div')`
   }
 `
 
-const ProjectCounter = () => {
+const ProjectCounter = props => {
+  const projects = props.project
   return (
     <Count>
       <div className="wrap-count">
@@ -33,6 +34,9 @@ const ProjectCounter = () => {
         <span className="item current project-soccer">1</span>
         <span className="item project-redd">2</span>
         <span className="item project-perrin">3</span>
+        <span className="item project-bng">4</span>
+        <span className="item project-brito">5</span>
+        <span className="item project-thalasso">6</span>
       </div>
     </Count>
   )
