@@ -21,14 +21,27 @@ La partie blog est gérée avec [Prismic](https://prismic.io/)
 
 ### Page d'accueil - Fonctions principales
 
-1. **ggGoNext**
+1. **clickPrev et clickNext**
+
+Ce sont les deux grosses fonctions d'animations qui permettent de changer de projets
 
 ```javascript
-function fancyAlert(arg) {
-  if (arg) {
-    $.facebox({ div: '#foo' })
+  clickPrev() {
+    const projects = this.state.projectList
+    // eslint-disable-next-line prefer-destructuring
+    const currentProject = this.state.currentProject
+    const prevProject = currentProject - 1
+    // retourne  faux si pas de projet précédent
+    if (prevProject < 0) {
+      // Si pas de projet précédent j'annime le premier bouton "précédent"
+      const noProject = new TimelineMax({
+        paused: true,
+        delay: 0,
+        repeat: 1,
+        yoyo: true,
+      })
+    ...
   }
-}
 ```
 
 Use the Gatsby CLI to create a new site, specifying this project. If you don't have the CLI installed already, see [Gastby instructions](https://www.gatsbyjs.org/tutorial/part-zero/#using-the-gatsby-cli).
