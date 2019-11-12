@@ -98,6 +98,7 @@ const HandleKey = event => {
 const SectionContact = () => {
   return (
     <div className="section section3 contact" data-anchor="contact">
+      <Title>Contact</Title>
       <ContactWrapper>
         <form
           id="formContact"
