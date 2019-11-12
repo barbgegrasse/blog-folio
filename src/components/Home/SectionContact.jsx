@@ -98,7 +98,6 @@ const HandleKey = event => {
 const SectionContact = () => {
   return (
     <div className="section section3 contact" data-anchor="contact">
-      <Title>Contact</Title>
       <ContactWrapper>
         <form
           id="formContact"
@@ -109,6 +108,7 @@ const SectionContact = () => {
         >
           <input type="hidden" name="bot-field" />
           <input type="hidden" name="form-name" value="Contact Form" />
+          <Title>Contact</Title>
           <FormField>
             <InputTxt
               id="name"

@@ -54,12 +54,8 @@ const FooterSpooch = styled('img')`
 
 const Footer = () => (
   <FooterContainer>
-    <Link to="/">
-      <Logo />
-    </Link>
     <FooterAuthor href="http://developpeur-web.tech">
-      © {new Date().getFullYear()} — Designed & developed by Johan Petrikovsky -
-      Powered by Gatsby & Prismic
+      © {new Date().getFullYear()} - Powered by Gatsby & Prismic
       <FooterSpooch className="FooterSpooch" src={spooch} />
     </FooterAuthor>
   </FooterContainer>
