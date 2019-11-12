@@ -21,6 +21,16 @@ La partie blog est gérée avec [Prismic](https://prismic.io/)
 
 ### Page d'accueil - Fonctions principales
 
+1. **ggGoNext**
+
+```javascript
+function fancyAlert(arg) {
+  if (arg) {
+    $.facebox({ div: '#foo' })
+  }
+}
+```
+
 Use the Gatsby CLI to create a new site, specifying this project. If you don't have the CLI installed already, see [Gastby instructions](https://www.gatsbyjs.org/tutorial/part-zero/#using-the-gatsby-cli).
 
 ```sh
