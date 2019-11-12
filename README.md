@@ -1,26 +1,25 @@
-# Prist | A Gatsby & Prismic Starter
+# [EN COURS 🚧] Johan Petrikovsky - Portfolio / Blog
 
-A light-themed starter powered by [Gatsby v2](https://www.gatsbyjs.org) and [Prismic](https://prismic.io/) to showcase portfolios and blogs.
+Site personnel fait avec en deux parties, la partie présentation et la partie blog.
+Ce projet est basé sur React et Gatsby.
+La page index index utilise également la librairie Gsap pour les animations complexes et [FullpageJS](https://alvarotrigo.com/fullPage/) pour les sections.
+La partie blog est gérée avec [Prismic](https://prismic.io/)
 
 <img width="1280" alt="prist" src="https://user-images.githubusercontent.com/5288685/63654882-51787e00-c746-11e9-9e9e-2ab823129d93.png">
 
-
-### 👩‍💻 [Demo website](http://prist.marguerite.io)
+### 👩‍💻 [Voir le site en construction](http://kovsky-dev.netlify.com/)
 
 ## ✨ Features
 
-- Landing page with customizable Hero, Portfolio preview, and About component.
+- Page d'accueil avec animations.
 - [Emotion](https://emotion.sh/docs/styled) styled components
-- Blog layout and pages
-- Portfolio layout and pages
-- Google Analytics
-- Mobile ready
+- [GraphQL](https://graphql.org/) API
+- [EN COURS 🚧] Blog
+- [EN COURS 🚧] Mobile ready
 
-## 🚀 Getting Started
+## 🗎 Documentation
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/margueriteroth/gatsby-prismic-starter-prist)
-
-1. **Create a Gatsby site.**
+### Page d'accueil - Fonctions principales
 
 Use the Gatsby CLI to create a new site, specifying this project. If you don't have the CLI installed already, see [Gastby instructions](https://www.gatsbyjs.org/tutorial/part-zero/#using-the-gatsby-cli).
 
@@ -44,7 +43,6 @@ Your site is now running at `http://localhost:8000`!
 
 _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
 
-
 ## 👩‍🎤 Configuring Prismic
 
 1. **Create account and repo**
@@ -64,6 +62,7 @@ In your `gatsby-config.js` file, add your Prismic Repo name to the `repositoryNa
         }
     },
 ```
+
 3. **Define your Custom Types**
 
 This starter uses 3 Custom Types:
@@ -73,7 +72,8 @@ Create the three following Custom Types by selecting "Create New" in the top rig
 
 **1. Homepage** (Single)
 ![image](https://user-images.githubusercontent.com/5288685/65046592-f265ed80-d92e-11e9-8700-4602b9038c0d.png)
-In the right panel, select *JSON editor* and paste the following:
+In the right panel, select _JSON editor_ and paste the following:
+
 ```
 {
   "Main" : {
@@ -155,6 +155,7 @@ In the right panel, select *JSON editor* and paste the following:
 ```
 
 **2. Post** (Repeatable)
+
 ```
 {
   "Main" : {
@@ -227,7 +228,8 @@ In the right panel, select *JSON editor* and paste the following:
 }
 ```
 
-*** Project *** (Repeatable)
+**_ Project _** (Repeatable)
+
 ```{
   "Main" : {
     "project_title" : {
@@ -291,4 +293,3 @@ In the right panel, select *JSON editor* and paste the following:
   }
 }
 ```
-
