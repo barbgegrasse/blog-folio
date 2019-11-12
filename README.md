@@ -1,4 +1,7 @@
-# Prist | A Gatsby & Prismic Starter
+# [EN COURS] Johan Petrikovsky - Portfolio
+
+Site personnel fait avec en deux parties, la partie présentation et la partie blog. 
+Ce projet est basé sur React et Gatsby. La page index index utilise également la librairie Gsap pour les animations complexes et également [FullpageJS](https://alvarotrigo.com/fullPage/) pour les sections.
 
 A light-themed starter powered by [Gatsby v2](https://www.gatsbyjs.org) and [Prismic](https://prismic.io/) to showcase portfolios and blogs.
 
