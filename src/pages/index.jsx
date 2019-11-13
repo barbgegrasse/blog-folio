@@ -763,7 +763,7 @@ class FullpageWrapper extends React.Component {
   }
 
   render() {
-    const { currentProject, dispatch } = this.props
+    const { location, currentProject, dispatch } = this.props
     const delay = 800 // temps avant de déclencher l'animation pour la partie folio
     let timeoutId
     let animationIsFinished = false
@@ -1162,7 +1162,7 @@ class FullpageWrapper extends React.Component {
                       <ProjectCounter projects={this.state.projectList} />
                     </>
                   </SectionProjects>
-                  <SectionContact />
+                  <SectionContact location={location} />
                 </>
               )
             }}
