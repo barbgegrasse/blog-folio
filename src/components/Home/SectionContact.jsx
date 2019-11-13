@@ -144,20 +144,21 @@ class SectionContact extends React.Component {
   }
 
   render() {
+    const { feedbackMsg } = this.state
     return (
       <div className="section section3 contact" data-anchor="contact">
         <ContactWrapper>
           <form
-            id="formContact"
+            ref={this.domRef}
             name="Contact Form"
             method="POST"
             data-netlify="true"
-            action="/merci"
+            onSubmit={event => this.handleSubmit(event)}
           >
             <input type="hidden" name="bot-field" />
             <input type="hidden" name="form-name" value="Contact Form" />
             <Title>Contact</Title>
-            {this.state.feedbackMsg && <p>{this.state.feedbackMsg}</p>}
+            {feedbackMsg && <p>{feedbackMsg}</p>}
             <FormField>
               <InputTxt
                 id="name"
