@@ -111,6 +111,7 @@ class SectionContact extends React.Component {
   handleSubmit(event) {
     // Do not submit form via HTTP, since we're doing that via XHR request.
     event.preventDefault()
+
     // Loop through this component's refs (the fields) and add them to the
     // formData object. What we're left with is an object of key-value pairs
     // that represent the form data we want to send to Netlify.
@@ -125,7 +126,7 @@ class SectionContact extends React.Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: qs.stringify(formData),
     }
-
+    console.log(formData)
     // Submit to Netlify. Upon success, set the feedback message and clear all
     // the fields within the form. Upon failure, keep the fields as they are,
     // but set the feedback message to show the error state.
@@ -155,12 +156,18 @@ class SectionContact extends React.Component {
             data-netlify="true"
             onSubmit={event => this.handleSubmit(event)}
           >
-            <input type="hidden" name="bot-field" />
-            <input type="hidden" name="form-name" value="Contact Form" />
+            {/* <input type="hidden" ref="form-name" name="bot-field" /> */}
+            <input
+              type="hidden"
+              ref="form-name"
+              name="form-name"
+              value="Contact Form"
+            />
             <Title>Contact</Title>
             {feedbackMsg && <p>{feedbackMsg}</p>}
             <FormField>
               <InputTxt
+                ref="form-name"
                 id="name"
                 className="input-text js-input"
                 type="text"
@@ -173,6 +180,7 @@ class SectionContact extends React.Component {
             </FormField>
             <FormField>
               <InputTxt
+                ref="form-name"
                 onKeyUp={SectionContact.HandleKey}
                 id="email"
                 type="email"
@@ -184,6 +192,7 @@ class SectionContact extends React.Component {
             </FormField>
             <FormField>
               <InputTxt
+                ref="form-name"
                 onKeyUp={SectionContact.HandleKey}
                 id="message"
                 type="text"
