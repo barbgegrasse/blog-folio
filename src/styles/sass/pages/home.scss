@@ -87,7 +87,7 @@ body {
 /* SECTION 1 */
 
 .main-title {
-  margin-left: -800px;
+  transform: translateX(-100%);
   font-family: 'IBM Plex Mono', monospace;
   color: #0f0350;
   font-size: 90px;

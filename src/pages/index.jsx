@@ -140,7 +140,7 @@ class FullpageWrapper extends React.Component {
           name: 'Thalasso',
           desc:
             'Développement et intégration de la partie front-end du site Thalasso Blanco du groupe Serge Blanco',
-          technos: 'Wordpress / Woocommerce',
+          technos: 'HTML/CSS/SASS/jQuery/PHP',
           slug: 'thalasso',
           color: '#70a9c5',
           siteweb: 'https://www.thalassoblanco.com/',
@@ -177,13 +177,12 @@ class FullpageWrapper extends React.Component {
           '-webkit-linear-gradient(112deg, #0f0350 73%, #ffffff 50%)',
         ease: Power1.easeInOut,
       })
-      // .to('#fullpage', 1, {backgroundImage:"-webkit-linear-gradient(112deg, rgb(206, 38, 93) 34%, #0f0350 34%)", ease: Power1.easeInOut},'-=0.4')
       // Animation des éléments de présentation
       .addLabel('ouverture')
       .to(
         '#mainTitle',
         0.5,
-        { marginLeft: 0, ease: Power1.easeInOut },
+        { xPercent: 100, ease: Power1.easeInOut },
         'ouverture'
       )
       .to(
@@ -252,6 +251,7 @@ class FullpageWrapper extends React.Component {
     el.style.backgroundColor = this.props.mainColor
   }
 
+  // Visualisation du projet suivant
   clickPrev() {
     const projects = this.state.projectList
     // eslint-disable-next-line prefer-destructuring
@@ -492,6 +492,7 @@ class FullpageWrapper extends React.Component {
     return true
   }
 
+  // Visualisation du projet précédent
   clickNext() {
     const projects = this.state.projectList
     // eslint-disable-next-line prefer-destructuring
@@ -756,6 +757,7 @@ class FullpageWrapper extends React.Component {
     this.animButtons.play()
   }
 
+  // Arrêt de l'animation des boutons au rollover
   stopButtons() {
     this.animButtons.clear()
   }
@@ -1012,7 +1014,7 @@ class FullpageWrapper extends React.Component {
                   '#mainmenu a:nth-child(3)'
                 )
                 contactItem.style.color = colors.blue900
-                console.log('retour premier slide')
+
                 new TimelineLite()
                   .to('#miniLogo', 0.5, {
                     left: 0,
@@ -1033,7 +1035,7 @@ class FullpageWrapper extends React.Component {
                   .to(
                     '#mainTitle',
                     1,
-                    { xPercent: 0, ease: Power1.easeInOut },
+                    { xPercent: 100, ease: Power1.easeInOut },
                     'leaveOne'
                   )
 
@@ -1048,9 +1050,14 @@ class FullpageWrapper extends React.Component {
                     '#fonction',
                     0.5,
                     { xPercent: 100, ease: Power1.easeInOut },
-                    'leaveOne'
+                    'leaveOne+=0.5'
                   )
-
+                  .to(
+                    '#fonctionSmaller',
+                    0.5,
+                    { xPercent: 100, ease: Power1.easeInOut },
+                    'leaveOne+=0.5'
+                  )
                   // Retour background diagonale
                   .to(
                     '#fullpage',
