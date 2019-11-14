@@ -43,9 +43,19 @@ const globalStyles = css`
   ul {
     margin-bottom: 1rem;
     li {
-      display: block;
-      margin-left: 1rem;
+      display: list-item;
+      margin-left: 1.5rem;
+      list-style-type: square;
     }
+  }
+
+  pre {
+    margin-bottom: 1rem;
+  }
+
+  .hn-title {
+    margin-bottom: 1.5rem;
+    font-weight: bold;
   }
 
   /*
