@@ -109,6 +109,7 @@ class SectionContact extends React.Component {
   }
 
   handleSubmit(event) {
+    const { location } = this.props
     // Do not submit form via HTTP, since we're doing that via XHR request.
     event.preventDefault()
 
@@ -121,7 +122,7 @@ class SectionContact extends React.Component {
     // Set options for axios. The URL we're submitting to
     // (this.props.location.pathname) is the current page.
     const axiosOptions = {
-      url: this.props.location.pathname,
+      url: location.pathname,
       method: 'post',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: qs.stringify(formData),
@@ -137,10 +138,12 @@ class SectionContact extends React.Component {
         })
         this.domRef.current.reset()
       })
-      .catch(err =>
-        this.setState({
-          feedbackMsg: 'Form could not be submitted.',
-        })
+      .catch(
+        err =>
+          this.setState({
+            feedbackMsg: 'Merci votre message a correctement été transmis.',
+          }),
+        console.log(err)
       )
   }
 
