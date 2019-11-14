@@ -7,12 +7,13 @@ La partie blog est gérée avec [Prismic](https://prismic.io/) le contenu est r�
 
 <img width="1280" alt="prist" src="https://i.imgur.com/dcNtshl.png">
 
-### 👩‍💻 [Voir le site en construction](http://kovsky-dev.netlify.com/)
+### 👩‍💻 [Voir le site en construction](http://developpeur-web.tech//)
 
 ## ✨ Features
 
 - Page d'accueil avec animations.
 - [Emotion](https://emotion.sh/docs/styled) styled components
 - [GraphQL](https://graphql.org/) API
-- [EN COURS 🚧] Blog
+- Hébergement sur [Netlify](https://netlify.com/) déploiement via GIT
+- [EN COURS 🚧] Blog fait avec [Prismic](https://netlify.com/) interrogé via GraphQL
 - [EN COURS 🚧] Mobile ready

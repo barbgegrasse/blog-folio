@@ -143,12 +143,10 @@ class SectionContact extends React.Component {
         })
         this.domRef.current.reset()
       })
-      .catch(
-        err =>
-          this.setState({
-            feedbackMsg: 'Merci votre message a correctement été transmis.',
-          }),
-        console.log(err)
+      .catch(err =>
+        this.setState({
+          feedbackMsg: 'Merci votre message a correctement été transmis.',
+        })
       )
   }
 
