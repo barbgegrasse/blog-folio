@@ -143,12 +143,13 @@ class SectionContact extends React.Component {
         })
         this.domRef.current.reset()
       })
-      .catch(function error(err) {
-        this.setState({
-          feedbackMsg: 'Merci votre message a correctement été transmis.',
-        })
+      .catch(
+        err =>
+          this.setState({
+            feedbackMsg: 'Merci votre message a correctement été transmis.',
+          }),
         console.log(err)
-      })
+      )
   }
 
   render() {
@@ -163,13 +164,7 @@ class SectionContact extends React.Component {
             data-netlify="true"
             onSubmit={event => this.handleSubmit(event)}
           >
-            <input type="hidden" ref="form-name" name="bot-field" />
-            <input
-              type="hidden"
-              ref="form-name"
-              name="form-name"
-              value="Contact Form"
-            />
+            <input type="hidden" name="form-name" value="Contact Form" />
             <Title>Contact</Title>
             {feedbackMsg && <FormResponse>{feedbackMsg}</FormResponse>}
             <FormField>
@@ -187,7 +182,7 @@ class SectionContact extends React.Component {
             </FormField>
             <FormField>
               <InputTxt
-                ref="form-name"
+                ref="email"
                 onKeyUp={SectionContact.HandleKey}
                 id="email"
                 type="email"
@@ -199,7 +194,8 @@ class SectionContact extends React.Component {
             </FormField>
             <FormField>
               <InputTxt
-                ref="form-name"
+                ref="message"
+                name="message"
                 onKeyUp={SectionContact.HandleKey}
                 id="message"
                 type="text"
