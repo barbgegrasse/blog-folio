@@ -69,6 +69,11 @@ const FormField = styled('div')`
   position: relative;
   margin: 32px 0;
 `
+const FormResponse = styled('p')`
+  text-align: center;
+  font-weight: bold;
+`
+
 const SubmitButton = styled('input')`
   display: inline-block;
   padding: 10px 15px;
@@ -138,13 +143,12 @@ class SectionContact extends React.Component {
         })
         this.domRef.current.reset()
       })
-      .catch(
-        err =>
-          this.setState({
-            feedbackMsg: 'Merci votre message a correctement été transmis.',
-          }),
+      .catch(function error(err) {
+        this.setState({
+          feedbackMsg: 'Merci votre message a correctement été transmis.',
+        })
         console.log(err)
-      )
+      })
   }
 
   render() {
@@ -159,7 +163,7 @@ class SectionContact extends React.Component {
             data-netlify="true"
             onSubmit={event => this.handleSubmit(event)}
           >
-            {/* <input type="hidden" ref="form-name" name="bot-field" /> */}
+            <input type="hidden" ref="form-name" name="bot-field" />
             <input
               type="hidden"
               ref="form-name"
@@ -167,7 +171,7 @@ class SectionContact extends React.Component {
               value="Contact Form"
             />
             <Title>Contact</Title>
-            {feedbackMsg && <p>{feedbackMsg}</p>}
+            {feedbackMsg && <FormResponse>{feedbackMsg}</FormResponse>}
             <FormField>
               <InputTxt
                 ref="form-name"
