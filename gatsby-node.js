@@ -20,7 +20,6 @@ exports.createPages = async ({ graphql, actions }) => {
             edges {
               node {
                 project_title
-                project_preview_description
                 project_preview_thumbnail
                 project_category
                 project_post_date
