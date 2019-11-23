@@ -177,7 +177,6 @@ class SectionContact extends React.Component {
               <InputTxt
                 ref="form-name"
                 id="name"
-                name="name"
                 className="input-text js-input"
                 type="text"
                 required
@@ -192,7 +191,6 @@ class SectionContact extends React.Component {
                 ref="email"
                 onKeyUp={SectionContact.HandleKey}
                 id="email"
-                name="email"
                 type="email"
                 required
               />
