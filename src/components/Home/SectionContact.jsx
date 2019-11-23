@@ -128,6 +128,7 @@ class SectionContact extends React.Component {
     Object.keys(this.refs).map(key => (formData[key] = this.refs[key].value))
 
     try {
+      console.log(formData)
       axios.post('/', qs.stringify(formData), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -183,10 +184,13 @@ class SectionContact extends React.Component {
             ref={this.domRef}
             name="Contact Form"
             method="POST"
-            data-netlify="true"
             onSubmit={event => this.handleSubmit(event)}
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
           >
+            <input type="hidden" name="bot-field" />
             <input type="hidden" name="form-name" value="Contact Form" />
+
             <Title>Contact</Title>
             {feedbackMsg && <FormResponse>{feedbackMsg}</FormResponse>}
             <FormField>
