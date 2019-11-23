@@ -186,6 +186,7 @@ class SectionContact extends React.Component {
       <div className="section section3 contact" data-anchor="contact">
         <ContactWrapper>
           <form
+            action="/"
             id="contact-form"
             ref={this.domRef}
             name="Contact Form"
