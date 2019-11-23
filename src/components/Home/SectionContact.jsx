@@ -148,12 +148,12 @@ class SectionContact extends React.Component {
         })
         this.domRef.current.reset()
       })
-      .catch(err =>
-        console.log(err)
+      .catch(error => {
+        console.log(error)
         this.setState({
           feedbackMsg: 'Form could not be submitted.',
         })
-      )
+      })
   }
 
   render() {
