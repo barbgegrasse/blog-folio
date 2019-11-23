@@ -23,6 +23,10 @@ const ContactWrapper = styled('div')`
   background: #fff;
 `
 
+const Hidden = styled('p')`
+  display: none;
+`
+
 const Title = styled('h2')`
   margin: 0 0 40px 0;
   text-align: center;
@@ -128,8 +132,8 @@ class SectionContact extends React.Component {
     })
 
     event.preventDefault()
-    const testForm = document.querySelector('#contact-form')
-    fetch(testForm.getAttribute('action'), {
+    const contactForm = document.querySelector('#contact-form')
+    fetch(contactForm.getAttribute('action'), {
       method: 'POST',
       headers: {
         Accept: 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -147,44 +151,6 @@ class SectionContact extends React.Component {
         })
       }
     })
-
-    /*
-    // Do not submit form via HTTP, since we're doing that via XHR request.
-    event.preventDefault()
-    // Loop through this component's refs (the fields) and add them to the
-    // formData object. What we're left with is an object of key-value pairs
-    // that represent the form data we want to send to Netlify.
-    const formData = {}
-    Object.keys(this.refs).map(key => (formData[key] = this.refs[key].value))
-
-    // Set options for axios. The URL we're submitting to
-    // (this.props.location.pathname) is the current page.
-    const axiosOptions = {
-      url: this.props.location.pathname,
-      method: 'post',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: qs.stringify(formData),
-    }
-
-    // Submit to Netlify. Upon success, set the feedback message and clear all
-    // the fields within the form. Upon failure, keep the fields as they are,
-    // but set the feedback message to show the error state.
-    console.log(axiosOptions)
-    axios(axiosOptions)
-      .then(response => {
-        this.setState({
-          feedbackMsg: 'Form submitted successfully!',
-        })
-        this.domRef.current.reset()
-      })
-      .catch(error => {
-        console.log(error)
-        this.setState({
-          feedbackMsg: 'Form could not be submitted.',
-        })
-      })
-
-      */
   }
 
   render() {
@@ -200,7 +166,14 @@ class SectionContact extends React.Component {
             method="POST"
             data-netlify="true"
             onSubmit={event => this.handleSubmit(event)}
+            netlify-honeypot="bot-field"
           >
+            <Hidden>
+              <label>
+                Ne pas remplir si pas humain :
+                <input name="bot-field" />
+              </label>
+            </Hidden>
             <input
               ref="form-name"
               type="hidden"
