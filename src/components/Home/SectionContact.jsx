@@ -140,6 +140,7 @@ class SectionContact extends React.Component {
     // Submit to Netlify. Upon success, set the feedback message and clear all
     // the fields within the form. Upon failure, keep the fields as they are,
     // but set the feedback message to show the error state.
+    console.log(axiosOptions)
     axios(axiosOptions)
       .then(response => {
         this.setState({
@@ -148,7 +149,7 @@ class SectionContact extends React.Component {
         this.domRef.current.reset()
       })
       .catch(err =>
-        console.log(err,axiosOptions)
+        console.log(err)
         this.setState({
           feedbackMsg: 'Form could not be submitted.',
         })
