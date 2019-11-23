@@ -122,7 +122,22 @@ class SectionContact extends React.Component {
   handleSubmit(event) {
     // Do not submit form via HTTP, since we're doing that via XHR request.
     event.preventDefault()
+    axios.post('', encode)
+    this.setState({ feedbackMsg: true })
+    const formData = {}
+    Object.keys(this.refs).map(key => (formData[key] = this.refs[key].value))
 
+    try {
+      axios.post('/', qs.stringify(formData), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      })
+      console.log('success')
+    } catch (err) {
+      console.log(err)
+    }
+    /*
     // Loop through this component's refs (the fields) and add them to the
     // formData object. What we're left with is an object of key-value pairs
     // that represent the form data we want to send to Netlify.
@@ -156,6 +171,7 @@ class SectionContact extends React.Component {
             "Terrible nouvelle, une erreur s'est produite pendant l'envoi de votre message (︶︹︺) .",
         })
       })
+      */
   }
 
   render() {
