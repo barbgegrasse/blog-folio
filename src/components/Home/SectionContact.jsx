@@ -120,28 +120,8 @@ class SectionContact extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-    axios.post('', encode)
     // Do not submit form via HTTP, since we're doing that via XHR request.
-    /*
     event.preventDefault()
-    axios.post('', encode)
-    this.setState({ feedbackMsg: true })
-    const formData = {}
-    Object.keys(this.refs).map(key => (formData[key] = this.refs[key].value))
-
-    try {
-      console.log(formData)
-      axios.post('/', qs.stringify(formData), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      })
-      console.log('success')
-    } catch (err) {
-      console.log(err)
-    }
-    */
     // Loop through this component's refs (the fields) and add them to the
     // formData object. What we're left with is an object of key-value pairs
     // that represent the form data we want to send to Netlify.
@@ -150,7 +130,6 @@ class SectionContact extends React.Component {
 
     // Set options for axios. The URL we're submitting to
     // (this.props.location.pathname) is the current page.
-    /*
     const axiosOptions = {
       url: this.props.location.pathname,
       method: 'post',
@@ -158,40 +137,21 @@ class SectionContact extends React.Component {
       data: qs.stringify(formData),
     }
 
-    console.log(axiosOptions)
-    */
     // Submit to Netlify. Upon success, set the feedback message and clear all
     // the fields within the form. Upon failure, keep the fields as they are,
     // but set the feedback message to show the error state.
-    axios({
-      method: 'post',
-      url: this.props.location.pathname,
-      data: qs.stringify(formData),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    })
+    axios(axiosOptions)
       .then(response => {
-        console.log(response)
         this.setState({
-          feedbackMsg: 'Votre message a bien été transmis, merci.',
+          feedbackMsg: 'Form submitted successfully!',
         })
         this.domRef.current.reset()
       })
-      .catch(error => {
-        console.warn(error)
+      .catch(err =>
         this.setState({
-          feedbackMsg:
-            "Terrible nouvelle, une erreur s'est produite pendant l'envoi de votre message (︶︹︺) .",
+          feedbackMsg: 'Form could not be submitted.',
         })
-      })
-    /*
-      .catch(function(error) {
-        console.log(error)
-        this.setState({
-          feedbackMsg:
-            "Terrible nouvelle, une erreur s'est produite pendant l'envoi de votre message (︶︹︺) .",
-        })
-      })
-      */
+      )
   }
 
   render() {
@@ -203,12 +163,15 @@ class SectionContact extends React.Component {
             ref={this.domRef}
             name="Contact Form"
             method="POST"
-            onSubmit={event => this.handleSubmit(event)}
             data-netlify="true"
-            data-netlify-honeypot="bot-field"
+            onSubmit={event => this.handleSubmit(event)}
           >
-            <input type="hidden" name="bot-field" />
-            <input type="hidden" name="form-name" value="Contact Form" />
+            <input
+              ref="form-name"
+              type="hidden"
+              name="form-name"
+              value="Contact Form"
+            />
 
             <Title>Contact</Title>
             {feedbackMsg && <FormResponse>{feedbackMsg}</FormResponse>}
