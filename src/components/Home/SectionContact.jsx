@@ -120,6 +120,28 @@ class SectionContact extends React.Component {
   }
 
   handleSubmit(event) {
+    this.setState({
+      feedbackMsg: 'Form could not be submitted.',
+    })
+    event.preventDefault()
+    const testForm = document.querySelector('#contact-form')
+    const formData = new FormData(testForm)
+    fetch(testForm.getAttribute('action'), {
+      method: 'POST',
+      headers: {
+        Accept: 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: new URLSearchParams(formData).toString(),
+    }).then(res => {
+      if (res) {
+        console.log(res)
+      } else {
+        console.log('oops')
+      }
+    })
+
+    /*
     // Do not submit form via HTTP, since we're doing that via XHR request.
     event.preventDefault()
     // Loop through this component's refs (the fields) and add them to the
@@ -154,6 +176,8 @@ class SectionContact extends React.Component {
           feedbackMsg: 'Form could not be submitted.',
         })
       })
+
+      */
   }
 
   render() {
@@ -162,6 +186,7 @@ class SectionContact extends React.Component {
       <div className="section section3 contact" data-anchor="contact">
         <ContactWrapper>
           <form
+            id="contact-form"
             ref={this.domRef}
             name="Contact Form"
             method="POST"
