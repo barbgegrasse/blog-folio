@@ -148,6 +148,7 @@ class SectionContact extends React.Component {
         this.domRef.current.reset()
       })
       .catch(err =>
+        console.log(err,axiosOptions)
         this.setState({
           feedbackMsg: 'Form could not be submitted.',
         })
