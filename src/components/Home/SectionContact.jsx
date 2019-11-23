@@ -143,11 +143,20 @@ class SectionContact extends React.Component {
         })
         this.domRef.current.reset()
       })
+      /*
       .catch(err =>
         this.setState({
           feedbackMsg: 'Merci votre message a correctement été transmis.',
         })
       )
+        */
+      .catch(function(error) {
+        this.setState({
+          feedbackMsg:
+            "Unlucky, une erreur s'est produit pendant l'envoi de votre message (︶︹︺) .",
+        })
+        console.log(error)
+      })
   }
 
   render() {
