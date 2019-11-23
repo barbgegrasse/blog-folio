@@ -151,11 +151,13 @@ class SectionContact extends React.Component {
       )
         */
       .catch(function(error) {
+        console.log(error)
+        /*
         this.setState({
           feedbackMsg:
             "Unlucky, une erreur s'est produit pendant l'envoi de votre message (︶︹︺) .",
         })
-        console.log(error)
+        */
       })
   }
 
