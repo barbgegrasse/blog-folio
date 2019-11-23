@@ -126,6 +126,7 @@ class SectionContact extends React.Component {
     this.setState({
       feedbackMsg: 'Form could not be submitted.',
     })
+
     event.preventDefault()
     const testForm = document.querySelector('#contact-form')
     fetch(testForm.getAttribute('action'), {
@@ -137,9 +138,13 @@ class SectionContact extends React.Component {
       body: qs.stringify(formData),
     }).then(res => {
       if (res) {
-        console.log(qs.stringify(formData))
+        this.setState({
+          feedbackMsg: 'Merci votre message a bien été transmis.',
+        })
       } else {
-        console.log('oops')
+        this.setState({
+          feedbackMsg: "Terrible nouvelle votre message n'a pu être transmis.",
+        })
       }
     })
 
