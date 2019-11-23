@@ -120,22 +120,24 @@ class SectionContact extends React.Component {
   }
 
   handleSubmit(event) {
+    const formData = {}
+    Object.keys(this.refs).map(key => (formData[key] = this.refs[key].value))
+
     this.setState({
       feedbackMsg: 'Form could not be submitted.',
     })
     event.preventDefault()
     const testForm = document.querySelector('#contact-form')
-    const formData = new FormData(testForm)
     fetch(testForm.getAttribute('action'), {
       method: 'POST',
       headers: {
         Accept: 'application/x-www-form-urlencoded;charset=UTF-8',
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
-      body: new URLSearchParams(formData).toString(),
+      body: qs.stringify(formData),
     }).then(res => {
       if (res) {
-        console.log(res)
+        console.log(qs.stringify(formData))
       } else {
         console.log('oops')
       }
