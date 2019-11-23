@@ -120,7 +120,10 @@ class SectionContact extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault()
+    axios.post('', encode)
     // Do not submit form via HTTP, since we're doing that via XHR request.
+    /*
     event.preventDefault()
     axios.post('', encode)
     this.setState({ feedbackMsg: true })
@@ -138,7 +141,7 @@ class SectionContact extends React.Component {
     } catch (err) {
       console.log(err)
     }
-    /*
+    */
     // Loop through this component's refs (the fields) and add them to the
     // formData object. What we're left with is an object of key-value pairs
     // that represent the form data we want to send to Netlify.
@@ -147,24 +150,40 @@ class SectionContact extends React.Component {
 
     // Set options for axios. The URL we're submitting to
     // (this.props.location.pathname) is the current page.
-
+    /*
     const axiosOptions = {
       url: this.props.location.pathname,
       method: 'post',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: qs.stringify(formData),
     }
+
     console.log(axiosOptions)
+    */
     // Submit to Netlify. Upon success, set the feedback message and clear all
     // the fields within the form. Upon failure, keep the fields as they are,
     // but set the feedback message to show the error state.
-    axios(axiosOptions)
+    axios({
+      method: 'post',
+      url: this.props.location.pathname,
+      data: qs.stringify(formData),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    })
       .then(response => {
+        console.log(response)
         this.setState({
           feedbackMsg: 'Votre message a bien été transmis, merci.',
         })
         this.domRef.current.reset()
       })
+      .catch(error => {
+        console.warn(error)
+        this.setState({
+          feedbackMsg:
+            "Terrible nouvelle, une erreur s'est produite pendant l'envoi de votre message (︶︹︺) .",
+        })
+      })
+    /*
       .catch(function(error) {
         console.log(error)
         this.setState({
