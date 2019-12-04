@@ -17,6 +17,9 @@ const BlocPresentation = styled('div')`
   &.current {
     z-index: 300;
   }
+  @media (max-width: ${dimensions.maxwidthHorizonTab}px) {
+    background: #fff;
+  }
 `
 const BackgroundImageWrap = styled('div')`
   overflow: hidden;

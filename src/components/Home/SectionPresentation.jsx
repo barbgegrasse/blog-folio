@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import colors from '../../styles/colors'
+import dimensions from '../../styles/dimensions'
+import logo4 from '../../images/logo4.svg'
 
 const BlockPresentation = styled('div')`
   position: absolute;
@@ -27,6 +29,65 @@ const Fonction = styled('h2')`
   }
 `
 
+const BlockMoon = styled('div')`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 29.427%;
+  margin: auto;
+  height: 1385px;
+  width: 1385px;
+  .wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .wrap-logo {
+      z-index: 200;
+
+      position: absolute;
+      top: 50%;
+      left: 120%;
+      transform: translate(-50%, -50%);
+
+      mix-blend-mode: exclusion;
+    }
+
+    .wrap-moon {
+      z-index: 200;
+
+      position: absolute;
+      top: 50%;
+      left: 120%;
+      transform: translate(-50%, -50%);
+    }
+
+    .moon {
+      background-color: #f3ffb3;
+      clip-path: circle(50%);
+      width: 545px;
+      height: 545px;
+
+      @media (max-width: ${dimensions.maxwidthHorizonTab}px) {
+        width: 450px;
+        height: 450px;
+      }
+    }
+
+    .main-logo {
+      display: block;
+      width: 438px;
+      height: 331px;
+
+      background-image: ${logo4};
+      background-size: cover;
+      @media (max-width: ${dimensions.maxwidthMacBook}px) {
+        width: 600px;
+      }
+    }
+  }
+`
+
 const SectionPresentation = () => {
   return (
     <div className="section section1" data-anchor="presentation">
@@ -50,7 +111,7 @@ const SectionPresentation = () => {
         </div>
       </BlockPresentation>
 
-      <div id="blockMoon" className="block-moon">
+      <BlockMoon id="blockMoon">
         <div className="half" />
         <div className="wrap">
           <div id="wrapLogo" className="wrap-logo">
@@ -60,7 +121,7 @@ const SectionPresentation = () => {
             <div id="mainLogo" className="main-logo" />
           </div>
         </div>
-      </div>
+      </BlockMoon>
     </div>
   )
 }
