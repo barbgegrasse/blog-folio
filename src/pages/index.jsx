@@ -775,7 +775,7 @@ class FullpageWrapper extends React.Component {
 
     const largeur = window.innerWidth
     let posBlocPresentation = '11%'
-
+    console.log(largeur)
     if (largeur < 766) {
       posBlocPresentation = '0'
     }
