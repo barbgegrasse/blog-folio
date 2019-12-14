@@ -773,12 +773,13 @@ class FullpageWrapper extends React.Component {
     let timeoutId
     let animationIsFinished = false
 
-    const largeur = window.innerWidth
+    // const largeur = window.innerWidth
     let posBlocPresentation = '11%'
-    console.log(largeur)
+    /*
     if (largeur < 766) {
       posBlocPresentation = '0'
     }
+    */
 
     return (
       <>
