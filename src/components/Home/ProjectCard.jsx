@@ -14,11 +14,22 @@ const BlocPresentation = styled('div')`
   left: 0;
   transform: translate(-100%, -50%);
   overflow: hidden;
+
   &.current {
     z-index: 300;
   }
+
   @media (max-width: ${dimensions.maxwidthHorizonTab}px) {
     background: #fff;
+  }
+
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    top: initial;
+    bottom: 10px;
+    transform: translate(-100%, 0);
+    background: none;
+    left: 10px;
+    mix-blend-mode: multiply;
   }
 `
 const BackgroundImageWrap = styled('div')`
@@ -31,14 +42,16 @@ const BackgroundImageWrap = styled('div')`
   width: 1020px;
   transform: translateY(-50%);
 
-  /* mix-blend-mode: luminosity; */
-
   &.current {
     z-index: 150;
   }
 
   @media (max-width: ${dimensions.maxwidthMacBook}px) {
+    top: 120px;
+    transform: translateY(0);
     width: 600px;
+    max-width: 100%;
+    right: 0;
   }
 `
 
@@ -52,6 +65,10 @@ const BackgroundImage = styled('div')`
   @media (max-width: ${dimensions.maxwidthMacBook}px) {
     height: 537px;
   }
+
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    height: 275px;
+  }
 `
 
 const TitleProject = styled('h2')`
@@ -63,6 +80,11 @@ const TitleProject = styled('h2')`
   line-height: 1;
   font-style: italic;
   transform: translate(-101%, 0);
+
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    font-size: 55px;
+    margin-bottom: 15px;
+  }
 `
 
 const DescProject = styled('p')`
@@ -70,6 +92,10 @@ const DescProject = styled('p')`
   color: #0f0350;
   font-size: 24px;
   max-width: 450px;
+
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    font-size: 16px;
+  }
 `
 
 const Technos = styled('span')`
@@ -78,6 +104,10 @@ const Technos = styled('span')`
   color: #0f0350;
   margin-top: 40px;
   font-family: 'Share Tech Mono';
+
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    display: none;
+  }
 `
 
 const LinkProject = styled('a')`

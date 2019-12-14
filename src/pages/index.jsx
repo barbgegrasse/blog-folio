@@ -30,6 +30,11 @@ const BlockSpan = styled('div')`
   @media (max-width: ${dimensions.maxwidthMacBook}px) {
     top: 355px;
   }
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    top: 415px;
+    left: 10px;
+  }
+
   left: 11%;
   .item {
     display: block;
@@ -767,6 +772,14 @@ class FullpageWrapper extends React.Component {
     const delay = 800 // temps avant de déclencher l'animation pour la partie folio
     let timeoutId
     let animationIsFinished = false
+
+    const largeur = window.innerWidth
+    let posBlocPresentation = '11%'
+
+    if (largeur < 766) {
+      posBlocPresentation = '0'
+    }
+
     return (
       <>
         <Helmet title="Johan Petrikovsky - Developpeur web à Toulouse" />
@@ -782,7 +795,7 @@ class FullpageWrapper extends React.Component {
             animateAnchor={animateAnchor}
             scrollingSpeed={500}
             navigation
-            navigationPosition="left"
+            // navigationPosition="bottom"
             slidesNavigation={false}
             slidesNavPosition="bottom"
             onLeave={(origin, destination, direction) => {
@@ -873,7 +886,7 @@ class FullpageWrapper extends React.Component {
 
                     .to('.bloc-presentation', 0, {
                       xPercent: 100,
-                      left: '11%',
+                      left: posBlocPresentation,
                       ease: Power4.easeInOut,
                     })
                     .to(

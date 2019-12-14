@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import dimensions from '../../styles/dimensions'
 
 const Count = styled('div')`
   position: absolute;
@@ -9,6 +10,10 @@ const Count = styled('div')`
   font-size: 112px;
   color: #fff;
   font-family: 'Share Tech Mono';
+
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    display: none;
+  }
   .wrap-count {
     position: relative;
     overflow: hidden;
