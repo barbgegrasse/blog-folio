@@ -11,7 +11,7 @@ import Header from 'components/Header'
 import 'styles/fonts.scss'
 
 const LayoutContainer = styled.div`
-  max-width: ${dimensions.maxwidthDesktop}px;
+  max-width: 100%;
   padding-left: ${dimensions.paddingHorizontalDesktop}em;
   padding-right: ${dimensions.paddingHorizontalDesktop}em;
   margin: 0 auto;

@@ -17,7 +17,7 @@ const typeStyles = css`
       font-size: 2em;
     }
   }
-
+  /*
   h2 {
     margin-bottom: 2rem;
     font-size: 1.9em;
@@ -49,7 +49,7 @@ const typeStyles = css`
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 200;
   }
-
+*/
   p {
     line-height: 1.9;
   }

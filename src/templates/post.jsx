@@ -16,20 +16,23 @@ import Hn from '../components/slices/Hn'
 import Image from '../components/slices/Image'
 
 const PostHeroContainer = styled('div')`
+  display: block;
   max-height: 500px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  margin-bottom: 3em;
+  max-width: 980px;
+  margin: 0 auto 3em;
+  text-align: center;
 
   img {
-    width: 100%;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
   }
 `
 
 const PostHeroAnnotation = styled('div')`
   padding-top: 0.25em;
+  padding-bottom: 3rem;
+  text-align: right;
 
   h6 {
     text-align: right;

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 const PostCardContainer = styled(Link)`
   border: 1px solid ${colors.grey200};
-  padding: 3em 2.5em 2.25em 2.5em;
+  padding: 2.5em 2.5em 2.25em 2.5em;
   border-radius: 3px;
   text-decoration: none;
   color: currentColor;
@@ -45,6 +45,7 @@ const PostTitle = styled('h2')`
   margin: 0;
   margin-top: 0.5em;
   color: ${colors.yellow500};
+  font-size: 3rem;
 `
 
 const PostMetas = styled('div')`

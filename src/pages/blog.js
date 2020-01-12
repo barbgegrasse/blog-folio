@@ -18,7 +18,7 @@ const BlogTitle = styled('h1')`
 
 const BlogGrid = styled('div')`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 2.5em;
 
   @media (max-width: 1050px) {
