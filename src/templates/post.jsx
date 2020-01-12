@@ -6,7 +6,7 @@ import Moment from 'react-moment'
 import { graphql } from 'gatsby'
 import { RichText } from 'prismic-reactjs'
 import styled from '@emotion/styled'
-import colors from 'styles/colors'
+import colors from '../styles/colors'
 import Layout from 'components/Layout'
 
 // Slice
@@ -73,6 +73,14 @@ const PostTitle = styled('div')`
 const PostBody = styled('div')`
   max-width: 980px;
   margin: 0 auto;
+  a {
+    color: ${colors.pink900};
+    text-decoration: none;
+    font-style: italic;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
   .block-img {
     margin-top: 3.5em;
