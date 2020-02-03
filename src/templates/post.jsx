@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+
 import Moment from 'react-moment'
 import { graphql } from 'gatsby'
 import { RichText } from 'prismic-reactjs'
 import styled from '@emotion/styled'
-import Layout from '../components/Layout'
 import colors from '../styles/colors'
+import Layout from '../components/Layout'
 
 // Slice
 import Code from '../components/slices/Code'
@@ -130,11 +131,11 @@ const PostSlices = ({ slices }) => {
   })
 }
 
-const Post = ({ postContent, meta }) => {
+const Post = ({ post, meta }) => {
   return (
     <>
       <Helmet
-        title={`${postContent.post_title[0].text} | Developpeur front end Blog`}
+        title={`${post.post_title[0].text} | Developpeur front end Blog`}
         titleTemplate={`%s | ${meta.title}`}
         meta={[
           {
@@ -143,7 +144,7 @@ const Post = ({ postContent, meta }) => {
           },
           {
             property: `og:title`,
-            content: `${postContent.post_title[0].text} | Developpeur front end Blog`,
+            content: `${post.post_title[0].text} | Developpeur front end Blog`,
           },
           {
             property: `og:description`,
@@ -172,48 +173,43 @@ const Post = ({ postContent, meta }) => {
         ].concat(meta)}
       />
       <Layout>
-        <PostCategory>
-          {RichText.render(postContent.post_category)}
-        </PostCategory>
-        <PostTitle>{RichText.render(postContent.post_title)}</PostTitle>
+        <PostCategory>{RichText.render(post.post_category)}</PostCategory>
+        <PostTitle>{RichText.render(post.post_title)}</PostTitle>
         <PostMetas>
-          <PostAuthor>{postContent.post_author}</PostAuthor>
+          <PostAuthor>{post.post_author}</PostAuthor>
           <PostDate>
-            <Moment format="MMMM D, YYYY">{postContent.post_date}</Moment>
+            <Moment format="MMMM D, YYYY">{post.post_date}</Moment>
           </PostDate>
         </PostMetas>
-        {postContent.post_hero_image && (
+        {post.post_hero_image && (
           <PostHeroContainer>
-            <img
-              src={postContent.post_hero_image.url}
-              alt={postContent.post_title}
-              title
-            />
+            <img src={post.post_hero_image.url} alt="bees" />
             <PostHeroAnnotation>
-              {RichText.render(postContent.post_hero_annotation)}
+              {RichText.render(post.post_hero_annotation)}
             </PostHeroAnnotation>
           </PostHeroContainer>
         )}
         <PostBody>
-          <PostSlices slices={postContent.post_body} />
+          <PostSlices slices={post.post_body} />
         </PostBody>
       </Layout>
     </>
   )
 }
+
 Post.propTypes = {
-  postContent: PropTypes.element.isRequired,
+  post: PropTypes.element.isRequired,
   meta: PropTypes.element.isRequired,
 }
 
-export default function post({ data }) {
+export default function getPost({ data }) {
   const postContent = data.prismic.allPosts.edges[0].node
   const meta = data.site.siteMetadata
   return <Post post={postContent} meta={meta} />
 }
 
-post.propTypes = {
-  data: PropTypes.element.isRequired,
+getPost.propTypes = {
+  data: PropTypes.object.isRequired,
 }
 
 export const query = graphql`
