@@ -71,7 +71,6 @@ const PostTitle = styled('div')`
 `
 
 const PostBody = styled('div')`
-  max-width: 980px;
   margin: 0 auto;
   a {
     color: ${colors.pink900};
@@ -205,7 +204,7 @@ Post.propTypes = {
 export default function getPost({ data }) {
   const postContent = data.prismic.allPosts.edges[0].node
   const meta = data.site.siteMetadata
-  return <Post post={postContent} meta={meta} />
+  return <Post postContent={postContent} meta={meta} />
 }
 
 getPost.propTypes = {
