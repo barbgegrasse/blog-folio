@@ -1,11 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from '@emotion/styled'
+
+const PostSlice = styled('div')`
+  text-align: center;
+  padding: 2rem 0;
+`
 
 export default function Image({ slice }) {
   return (
-    <div className="post-slice">
+    <PostSlice>
       <img src={slice.primary.image.url} alt="" title="" />
-    </div>
+    </PostSlice>
   )
 }
 

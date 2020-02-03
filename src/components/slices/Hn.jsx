@@ -1,22 +1,21 @@
 import React from 'react'
-import { RichText } from 'prismic-reactjs'
-import { linkResolver } from '../../utils/linkResolver'
+import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import colors from '../../styles/colors'
 
 const HnTitle = styled('span')`
+  max-width: 1000px;
   display: block;
-  margin: 3rem 0 1.5rem;
+  padding: 0 10px;
+  margin: 3rem auto 1.5rem;
   font-size: 3rem;
   font-weight: 200;
   font-style: italic;
   color: ${colors.yellow500};
 `
 
-export default ({ slice }) => {
-  const type = slice.fields[0].hn[0].type
-  const text = slice.fields[0].hn[0].text
-
+export default function Hn({ slice }) {
+  const { type, text } = slice.fields[0].hn[0]
   const res = (() => {
     switch (type) {
       case 'heading2':
@@ -26,7 +25,11 @@ export default ({ slice }) => {
           </h2>
         )
       case 'heading3':
-        return <h3>{text}</h3>
+        return (
+          <h3>
+            <HnTitle>{text}</HnTitle>
+          </h3>
+        )
       case 'heading4':
         return <h4>{text}</h4>
       case 'heading5':
@@ -39,4 +42,8 @@ export default ({ slice }) => {
   })()
 
   return <>{res}</>
+}
+
+Hn.propTypes = {
+  slice: PropTypes.element.isRequired,
 }
