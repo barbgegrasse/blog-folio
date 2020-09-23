@@ -7,7 +7,7 @@ La partie blog est gérée avec [Prismic](https://prismic.io/) le contenu est r�
 
 <img width="1280" alt="prist" src="https://i.imgur.com/dcNtshl.png">
 
-### 👩‍💻 [Voir le site en construction](http://developpeur-web.tech//)
+### 👩‍💻 [Développeur web à Toulouse](http://developpeur-web.tech//)
 
 ## ✨ Features
 
